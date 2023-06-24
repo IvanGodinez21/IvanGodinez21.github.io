@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import NextTools from '@/classes/next_tools';
 import { content } from '@/contexts/scroll_ref';
 import { INextPageWithLayout } from '@/types/app';
@@ -50,7 +51,11 @@ const ProjectsPage: INextPageWithLayout = ({ className }) => {
   return (
     <div className={[className, 'h-fit w-full'].filter(Boolean).join(' ')}>
       {repos?.map((repo, i, repos) => (
-        <a key={repo.id} href={repo.html_url} className={`${repo.private ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        <Link
+          key={repo.id}
+          href={repo.html_url}
+          className={`${repo.private ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        >
           <div
             className={`bg-medium-spring-green dark:bg-prussian-blue shadow-md rounded-md p-4 hover:shadow-lg transition-shadow ${
               i !== repos.length - 1 ? 'mb-2' : ''
@@ -80,7 +85,7 @@ const ProjectsPage: INextPageWithLayout = ({ className }) => {
               </span>
             </div>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );

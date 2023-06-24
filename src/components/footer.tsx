@@ -1,9 +1,22 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { FC } from 'react';
+import { IContactMethod } from '@/types/contact';
 import { useAppState } from '@/contexts/app_state';
 
 const Footer: FC = () => {
   const { user } = useAppState();
+  const contactMethods: IContactMethod[] = [
+    { icon: '/icons/facebook.svg', name: 'Facebook', url: `https://facebook.com/${user.social.facebook.username}` },
+    {
+      icon: '/icons/github.svg',
+      name: 'GitHub',
+      url: user.social.github.html_url ?? `https://github.com/${user.social.github.username}`,
+    },
+    { icon: '/icons/linkedin.svg', name: 'LinkedIn', url: `https://linkedin.com/in/${user.social.linkedin.username}` },
+
+    { icon: '/icons/twitter.svg', name: 'Twitter', url: `https://twitter.com/${user.social.twitter.username}` },
+  ];
 
   return (
     <div className={'bg-emerald text-gunmetal md:flex md:items-center md:justify-between p-2'}>
@@ -13,32 +26,22 @@ const Footer: FC = () => {
         </span>
       </div>
       <div className={'flex max-md:justify-center'}>
-        {user.social.facebook.username && (
-          <a className={'btn-footer-icon'} href={`https://facebook.com/${user.social.facebook.username}`}>
-            <Image priority src={'/icons/facebook.svg'} alt={'Facebook'} className={'w-5 h-5'} width={0} height={0} />
-          </a>
-        )}
-        {(user.social.github.html_url ?? user.social.github.username) && (
-          <a
-            className={'btn-footer-icon'}
-            href={user.social.github.html_url ?? `https://github.com/${user.social.github.username}`}
-          >
-            <Image priority src={'/icons/github.svg'} alt={'GitHub'} className={'w-5 h-5'} width={0} height={0} />
-          </a>
-        )}
-        {user.social.linkedin.username && (
-          <a className={'btn-footer-icon'} href={`https://linkedin.com/in/${user.social.linkedin.username}`}>
-            <Image priority src={'/icons/linkedin.svg'} alt={'LinkedIn'} className={'w-5 h-5'} width={0} height={0} />
-          </a>
-        )}
-        {user.social.twitter.username && (
-          <a
-            className={'btn-footer-icon'}
-            href={user.social.github.login ? `https://twitter.com/${user.social.twitter.username}` : undefined}
-          >
-            <Image priority src={'/icons/twitter.svg'} alt={'Twitter'} className={'w-5 h-5'} width={0} height={0} />
-          </a>
-        )}
+        {contactMethods
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .map((contactMethod, index) => (
+            <Link key={index} href={contactMethod.url} target={'_blank'} rel={'noopener'} className={'btn-footer-icon'}>
+              {typeof contactMethod.icon === 'string' && (
+                <Image
+                  src={contactMethod.icon}
+                  alt={contactMethod.name}
+                  priority
+                  className={'w-5 h-5'}
+                  width={0}
+                  height={0}
+                />
+              )}
+            </Link>
+          ))}
       </div>
     </div>
   );

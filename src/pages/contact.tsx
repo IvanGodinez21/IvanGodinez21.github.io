@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import NextTools from '@/classes/next_tools';
 import { ArrowTopRightOnSquareIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/solid';
 import { IContactMethod } from '@/types/contact';
@@ -37,7 +38,7 @@ const ContactPage: INextPageWithLayout = ({ className }) => {
             .sort((a, b) => (a.name > b.name ? 1 : -1))
             .map((contactMethod, index) => (
               <li key={index}>
-                <a href={contactMethod.url} target={'_blank'} rel={'noopener noreferrer'} className={'btn-contact'}>
+                <Link href={contactMethod.url} target={'_blank'} rel={'noopener noreferrer'} className={'btn-contact'}>
                   {typeof contactMethod.icon === 'string' ? (
                     <Image
                       src={contactMethod.icon}
@@ -52,7 +53,7 @@ const ContactPage: INextPageWithLayout = ({ className }) => {
                   )}
                   <span className={'flex-1 ml-3 whitespace-nowrap'}>{contactMethod.name}</span>
                   <ArrowTopRightOnSquareIcon className={'w-6 h-6'} />
-                </a>
+                </Link>
               </li>
             ))}
         </ul>

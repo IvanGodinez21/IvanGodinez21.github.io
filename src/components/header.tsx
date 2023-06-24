@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { FC, ReactNode, useEffect, useState } from 'react';
+import { IRoute } from '@/types/route';
 import { useAppState } from '@/contexts/app_state';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
@@ -11,6 +12,32 @@ const Header: FC = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const [themeIcon, setThemeIcon] = useState<ReactNode>(null);
   const [navHidden, setNavHidden] = useState<boolean>(true);
+  const routes: IRoute[] = [
+    {
+      name: 'home',
+      path: function () {
+        return '/';
+      },
+    },
+    {
+      name: 'about',
+      path: function () {
+        return `/${this.name}`;
+      },
+    },
+    {
+      name: 'projects',
+      path: function () {
+        return `/${this.name}`;
+      },
+    },
+    {
+      name: 'contact',
+      path: function () {
+        return `/${this.name}`;
+      },
+    },
+  ];
 
   useEffect(() => {
     setThemeIcon(
@@ -71,38 +98,16 @@ const Header: FC = () => {
               'flex flex-col rounded-lg max-md:ring-2 max-md:bg-tea-green dark:max-md:bg-gunmetal md:flex-row md:space-x-4 md:text-sm md:font-medium md:border-0 ring-gunmetal dark:ring-tea-green max-md:text-gunmetal dark:max-md:text-tea-green'
             }
           >
-            <li>
-              <Link
-                className={`btn-navbar-category ${pathname === '/' ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
-                href={'/'}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`btn-navbar-category ${pathname === '/about' ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
-                href={'/about'}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`btn-navbar-category ${pathname === '/projects' ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
-                href={'/projects'}
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`btn-navbar-category ${pathname === '/contact' ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
-                href={'/contact'}
-              >
-                Contact
-              </Link>
-            </li>
+            {routes.map((route, index) => (
+              <li key={index}>
+                <Link
+                  className={`btn-navbar-category ${pathname === route.path() ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
+                  href={route.path()}
+                >
+                  {route.name[0].toUpperCase() + route.name.slice(1)}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <div className={'flex lg:order-3 md:order-4 max-sm:order-1'}>
