@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* *:root,
+  html {
+    @apply bg-tea-green dark:bg-gunmetal;
+  } */
+
+  body {
+    @apply bg-tea-green dark:bg-gunmetal text-gunmetal dark:text-tea-green;
+  }
+
+  /* *::-webkit-resizer {
+    background: transparent url() no-repeat -1px -1px;
+  } */
+
+  *::-webkit-scrollbar {
+    @apply h-3 w-3;
+  }
+
+  *::-webkit-scrollbar:window-inactive {
+  }
+
+  *::-webkit-scrollbar:corner-present {
+  }
+
+  *::-webkit-scrollbar-track-piece {
+    @apply bg-blue-saphire dark:bg-granny-smith-apple bg-clip-content border-4 border-solid rounded-sm border-transparent;
+  }
+
+  *::-webkit-scrollbar-track-piece:decrement {
+    @apply bg-prussian-blue dark:bg-emerald bg-clip-content border-4 border-solid rounded-sm border-transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply bg-gunmetal dark:bg-tea-green shadow rounded-md w-1 h-10;
+  }
+
+  *::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
+
+  *::-webkit-scrollbar-track-piece:no-button {
+    @apply bg-indigo-dye dark:bg-granny-smith-apple;
+  }
+
+  /* *::-webkit-scrollbar-button:vertical:start:decrement {
+    background: transparent url() no-repeat center center;
+  } */
+
+  /* *::-webkit-scrollbar-button:vertical:end:decrement {
+    background: transparent url() no-repeat center center;
+  } */
+
+  /* *::-webkit-scrollbar-button:vertical:end:increment {
+    background: transparent url() no-repeat center center;
+  } */
+
+  /* *::-webkit-scrollbar-button:horizontal:decrement {
+    background: transparent url() no-repeat center center;
+  } */
+
+  /* *::-webkit-scrollbar-button:horizontal:increment {
+    background: transparent url() no-repeat center center;
+  } */
+}
+
+.btn-selectable {
+  @apply rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none focus:ring-inset focus-visible:ring-gunmetal dark:focus-visible:ring-tea-green focus-visible:ring-2 active:bg-cadet-blue dark:active:bg-blue-saphire;
+}
+
+.btn-contact {
+  @apply btn-selectable flex items-center p-3 text-base font-bold bg-tea-green dark:bg-indigo-dye;
+}
+
+.btn-contact-icon {
+}
+
+.btn-navbar-icon {
+  @apply inline-flex items-center rounded-lg p-2 bg-transparent hover:bg-keppel focus:outline-none focus:ring-inset focus-visible:ring-gunmetal focus-visible:ring-2 active:bg-cadet-blue;
+}
+
+.btn-navbar-category {
+  @apply block max-md:py-2.5 max-md:px-2.5 p-2 rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none active:bg-cadet-blue dark:active:bg-blue-saphire focus-visible:ring-gunmetal focus-visible:ring-2;
+}
+
+.btn-footer-icon {
+  @apply inline-flex items-center rounded-lg p-1 bg-transparent focus:outline-none focus:ring-inset focus-visible:ring-gunmetal focus-visible:ring-2;
+}
