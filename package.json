@@ -1,0 +1,47 @@
+{
+  "name": "ivangodinez21.github.io",
+  "version": "1.0.0",
+  "description": "IvanGodinez21's GitHub Page",
+  "bugs": {
+    "url": "https://github.com/IvanGodinez21/IvanGodinez21.github.io/issues"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Jesús Iván Godínez Martínez",
+    "email": "ivano.godinez@gmail.com",
+    "url": "https://github.com/IvanGodinez21"
+  },
+  "funding": [
+    {
+      "type": "GitHub Sponsors",
+      "url": "https://github.com/sponsors/IvanGodinez21"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanGodinez21/IvanGodinez21.github.io.git"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@octokit/core": "^4.1.0",
+    "credit-card-type": "^9.1.0",
+    "octokit": "^2.0.10"
+  },
+  "devDependencies": {
+    "@nuxtjs/color-mode": "^3.1.8",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/google-fonts": "^3.0.0-1",
+    "@nuxtjs/tailwindcss": "^6.1.1",
+    "flowbite": "^1.5.3",
+    "nuxt": "3.0.0-rc.12",
+    "postcss-normalize-whitespace": "^5.1.1"
+  }
+}
