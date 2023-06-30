@@ -1,7 +1,7 @@
 import User from '@/classes/user';
 import { useEffect, useState } from 'react';
 
-export const useFetchUser = () => {
+export function useFetchUser() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -10,14 +10,15 @@ export const useFetchUser = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const user = new User(
-          await (
-            await fetch('/api/user', {
-              method: 'POST',
-            })
-          ).json()
-        );
-        setUser(user);
+        const response = await fetch('/api/user', {
+          method: 'GET',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUser(new User(data));
+        } else {
+          setError('Error fetching user data');
+        }
       } catch (error) {
         setError('Error fetching user data');
       } finally {
@@ -28,4 +29,4 @@ export const useFetchUser = () => {
   }, []);
 
   return { user, isLoading, error };
-};
+}

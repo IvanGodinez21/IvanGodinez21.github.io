@@ -1,24 +1,24 @@
+'use client';
+
 import Link from 'next/link';
-import NextTools from '@/classes/next_tools';
 import { content } from '@/contexts/scroll_ref';
-import { INextPageWithLayout } from '@/types/app';
 import { IRepo } from '@/types/repos';
 import { useEffect, useState } from 'react';
 import { useFetchRepos } from '@/hooks/useFetchRepos';
 
-const ProjectsPage: INextPageWithLayout = ({ className }) => {
+export default function ProjectsPage() {
   const [page, setPage] = useState<number>(1);
   const { repos, isLoading } = useFetchRepos({ page });
 
   useEffect(() => {
-    const handleScroll = () => {
+    function handleScroll() {
       if (content?.current) {
         const scrollPosition = content.current.scrollHeight - content.current.clientHeight;
         if (Math.ceil(content.current.scrollTop) >= scrollPosition) {
           if (!isLoading) setPage((currentPage) => currentPage + 1);
         }
       }
-    };
+    }
     if (content?.current) {
       content.current.addEventListener('scroll', handleScroll);
       return () => {
@@ -27,15 +27,15 @@ const ProjectsPage: INextPageWithLayout = ({ className }) => {
     }
   }, [isLoading]);
 
-  const isPrivate = ({ privacy }: { privacy: IRepo['private'] }) => {
+  function isPrivate({ privacy }: { privacy: IRepo['private'] }) {
     return (
       <span className={`inline-block rounded px-2 py-1 text-sm text-white ${privacy ? 'bg-red-500' : 'bg-green-500'}`}>
         {privacy ? 'Private' : 'Public'}
       </span>
     );
-  };
+  }
 
-  const status = ({ archived, privacy }: { archived: IRepo['archived']; privacy: IRepo['private'] }) => {
+  function status({ archived, privacy }: { archived: IRepo['archived']; privacy: IRepo['private'] }) {
     if (!archived) return isPrivate({ privacy });
     return (
       <span
@@ -46,10 +46,10 @@ const ProjectsPage: INextPageWithLayout = ({ className }) => {
         {archived && !privacy ? 'Public Archive' : 'Private Archive'}
       </span>
     );
-  };
+  }
 
   return (
-    <div className={[className, 'h-fit w-full'].filter(Boolean).join(' ')}>
+    <div className={'h-fit w-full m-2'}>
       {repos?.map((repo, i, repos) => (
         <Link
           key={repo.id}
@@ -89,8 +89,4 @@ const ProjectsPage: INextPageWithLayout = ({ className }) => {
       ))}
     </div>
   );
-};
-
-ProjectsPage.getLayout = NextTools.layout.default;
-
-export default ProjectsPage;
+}

@@ -1,16 +1,19 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { octokit } from '@/clients/octokit';
 import User from '@/classes/user';
+import { NextResponse } from 'next/server';
+import { octokit } from '@/clients/octokit';
+import Lanyard from '@/classes/lanyard';
 
-export default async function UserHandler(req: NextApiRequest, res: NextApiResponse<User>) {
-  if (req.method !== 'POST') {
-    res.status(405).end();
-    return;
-  }
+export async function GET() {
+  return NextResponse.json(await fetchUser());
+}
 
-  const github = await octokit.rest.users.getAuthenticated();
+async function fetchUser() {
+  const discord = process.env.NEXT_PUBLIC_DISCORD_ID
+    ? await Lanyard.fetch({ userId: process.env.NEXT_PUBLIC_DISCORD_ID })
+    : undefined;
+  const github = (await octokit.rest.users.getAuthenticated()).data;
 
-  const user = new User({
+  return new User({
     birthdate: process.env.BIRTHDATE,
     email: process.env.EMAIL,
     fathersName: process.env.FATHERS_NAME,
@@ -19,12 +22,17 @@ export default async function UserHandler(req: NextApiRequest, res: NextApiRespo
     username: process.env.USER_NAME,
     secondaryName: process.env.SECONDARY_NAME,
     social: {
+      discord: {
+        ...discord,
+        id: discord?.discord_user.id ?? process.env.DISCORD_ID,
+        username: discord?.discord_user.username ?? process.env.DISCORD_USERNAME,
+      },
       facebook: {
         username: process.env.FACEBOOK_USERNAME,
       },
       github: {
-        ...github.data,
-        username: github.data.login ?? process.env.GITHUB_USERNAME,
+        ...github,
+        username: github.login ?? process.env.GITHUB_USERNAME,
       },
       linkedin: {
         username: process.env.LINKEDIN_USERNAME,
@@ -46,5 +54,4 @@ export default async function UserHandler(req: NextApiRequest, res: NextApiRespo
     },
     telephone: process.env.TELEPHONE_NUMBER ? `+${Number(process.env.TELEPHONE_NUMBER)}` : undefined,
   });
-  res.status(200).json(user);
 }

@@ -1,7 +1,7 @@
 import { IRepo } from '@/types/repos';
 import { useEffect, useState } from 'react';
 
-export const useFetchRepos = ({ page }: { page: number }) => {
+export function useFetchRepos({ page }: { page: number }) {
   const [repos, setRepos] = useState<IRepo[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -10,10 +10,14 @@ export const useFetchRepos = ({ page }: { page: number }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('/api/repos', {
-          method: 'POST',
-          body: JSON.stringify({ page }),
-        });
+        const response = await fetch(
+          `/api/repos?${new URLSearchParams(
+            Object.entries({ page }).map(([key, value]) => [key, String(value)])
+          ).toString()}`,
+          {
+            method: 'GET',
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setRepos((prevRepos) => {
@@ -36,4 +40,4 @@ export const useFetchRepos = ({ page }: { page: number }) => {
   }, [page]);
 
   return { repos, isLoading, error };
-};
+}

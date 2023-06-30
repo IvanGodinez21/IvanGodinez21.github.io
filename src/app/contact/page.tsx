@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import NextTools from '@/classes/next_tools';
 import { ArrowTopRightOnSquareIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/solid';
 import { IContactMethod } from '@/types/contact';
-import { INextPageWithLayout } from '@/types/app';
-import { useAppState } from '@/contexts/app_state';
+import { getUser } from '@/utils/getUser';
 
-const ContactPage: INextPageWithLayout = ({ className }) => {
-  const { user } = useAppState();
+export default async function ContactPage() {
+  const user = await getUser();
   const contactMethods: IContactMethod[] = [
-    { icon: EnvelopeIcon, name: 'Email', url: `tel:${user.telephone}` },
+    {
+      icon: '/icons/discord.svg',
+      name: 'Discord',
+      url: `https://discord.com/channels/${user.social.discord.username}`,
+    },
+    { icon: EnvelopeIcon, name: 'Email', url: `mailto:${user.email ?? user.social.github.email}` },
     { icon: '/icons/facebook.svg', name: 'Facebook', url: `https://facebook.com/${user.social.facebook.username}` },
     {
       icon: '/icons/github.svg',
@@ -18,17 +21,13 @@ const ContactPage: INextPageWithLayout = ({ className }) => {
     },
     { icon: '/icons/linkedin.svg', name: 'LinkedIn', url: `https://linkedin.com/in/${user.social.linkedin.username}` },
     { icon: '/icons/telegram.svg', name: 'Telegram', url: `https://t.me/${user.social.telegram.username}` },
-    { icon: PhoneIcon, name: 'Thelephone', url: `mailto:${user.email ?? user.social.github.email}` },
+    { icon: PhoneIcon, name: 'Thelephone', url: `tel:${user.telephone}` },
     { icon: '/icons/twitter.svg', name: 'Twitter', url: `https://twitter.com/${user.social.twitter.username}` },
     { icon: '/icons/whatsapp.svg', name: 'WhatsApp', url: `https://wa.me/${user.social.whatsapp.telephone}` },
   ];
 
   return (
-    <div
-      className={[className, 'max-md:h-max max-md:w-full w-3/6 flex flex-1 items-center justify-center']
-        .filter(Boolean)
-        .join(' ')}
-    >
+    <div className={'flex flex-1 max-md:h-max max-md:w-full w-3/6 m-2 items-center justify-center'}>
       <div className={'p-6 bg-medium-spring-green dark:bg-prussian-blue rounded-lg shadow'}>
         <p className={'font-normal'}>
           Contact me via the following methods. I will try to get back to you as soon as possible.
@@ -60,8 +59,4 @@ const ContactPage: INextPageWithLayout = ({ className }) => {
       </div>
     </div>
   );
-};
-
-ContactPage.getLayout = NextTools.layout.default;
-
-export default ContactPage;
+}

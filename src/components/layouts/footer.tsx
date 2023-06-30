@@ -1,11 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
 import { IContactMethod } from '@/types/contact';
-import { useAppState } from '@/contexts/app_state';
+import { IUser } from '@/types/user';
 
-const Footer: FC = () => {
-  const { user } = useAppState();
+export default function Footer({ user }: { user: IUser }) {
   const contactMethods: IContactMethod[] = [
     { icon: '/icons/facebook.svg', name: 'Facebook', url: `https://facebook.com/${user.social.facebook.username}` },
     {
@@ -45,6 +43,4 @@ const Footer: FC = () => {
       </div>
     </div>
   );
-};
-
-export default Footer;
+}

@@ -83,7 +83,7 @@
 }
 
 .btn-navbar-category {
-  @apply block max-md:py-2.5 max-md:px-2.5 p-2 rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none active:bg-cadet-blue dark:active:bg-blue-saphire focus-visible:ring-gunmetal focus-visible:ring-2;
+  @apply block max-md:py-2.5 max-md:px-2.5 p-2 rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none active:bg-cadet-blue dark:active:bg-blue-saphire focus-visible:ring-gunmetal dark:focus-visible:max-md:ring-tea-green focus-visible:ring-2;
 }
 
 .btn-footer-icon {

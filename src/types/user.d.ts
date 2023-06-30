@@ -1,4 +1,5 @@
 import { Octokit } from 'octokit';
+import { ILanyardReponse } from './lanyard';
 
 export interface IUser {
   birthdate?: Date | string | null;
@@ -11,6 +12,7 @@ export interface IUser {
   username?: string;
   secondaryName?: string;
   social: {
+    discord: { username?: string; id?: string } & Partial<ILanyardReponse>;
     facebook: {
       username?: string;
     };

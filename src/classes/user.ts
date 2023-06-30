@@ -97,6 +97,11 @@ export default class User implements IUser {
 
   public get social(): IUser['social'] {
     return {
+      discord: {
+        ...this._social.discord,
+        id: this._social.discord.id,
+        username: this._social.discord.username ?? (override ? this.username : undefined),
+      },
       facebook: {
         username: this._social.facebook.username ?? (override ? this.username : undefined),
       },
@@ -120,7 +125,7 @@ export default class User implements IUser {
     };
   }
 
-  private sortObjectKeys({ object }: { object: { [key: string]: unknown } }): { [key: string]: unknown } {
+  private sortObjectKeys({ object }: { object: { [key: string]: unknown } }): IUser {
     const sortedObj: { [key: string]: unknown } = {};
     const sortedKeys = Object.keys(object).sort();
 
@@ -132,7 +137,7 @@ export default class User implements IUser {
           : value;
     }
 
-    return sortedObj;
+    return sortedObj as object as IUser;
   }
 
   public toJSON(): ReturnType<typeof this.sortObjectKeys> {
