@@ -1,7 +1,11 @@
 import { IRepo } from '@/types/repos';
 import { useEffect, useState } from 'react';
 
-export function useFetchRepos({ page }: { page: number }) {
+export function useFetchRepos({ page }: { page: number }): {
+  repos: IRepo[] | undefined;
+  isLoading: boolean;
+  error: string | undefined;
+} {
   const [repos, setRepos] = useState<IRepo[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);

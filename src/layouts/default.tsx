@@ -10,13 +10,13 @@ export default async function DefaultLayout({ children }: ILayout) {
   return (
     <div className={'flex flex-col h-screen'}>
       <header className={'sticky top-0 w-full '}>
-        <Header user={user.toJSON()} />
+        <Header user={user} />
       </header>
       <main className={'flex flex-col flex-1 m-4 space-y-2 overflow-y-hidden'}>
         <Main>{children}</Main>
       </main>
       <footer className={'sticky bottom-0 w-full'}>
-        <Footer user={user.toJSON()} />
+        <Footer user={user} />
       </footer>
     </div>
   );

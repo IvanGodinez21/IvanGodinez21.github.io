@@ -32,7 +32,7 @@ export default async function ContactPage() {
         <p className={'font-normal'}>
           Contact me via the following methods. I will try to get back to you as soon as possible.
         </p>
-        <ul className='my-4 grid md:grid-cols-2 gap-4'>
+        <ul className={'my-4 grid md:grid-cols-2 gap-4'}>
           {contactMethods
             .sort((a, b) => (a.name > b.name ? 1 : -1))
             .map((contactMethod, index) => (

@@ -1,86 +1,106 @@
-'use client';
-
-import { ILanyardReponse } from '@/types/lanyard';
-import { lanyard } from '@/clients/lanyard';
-import { Activities, LanyardSocketEvents } from '@/constants/lanyard';
-import { useEffect, useState } from 'react';
-import { useFetchUser } from '@/hooks/useFetchUser';
-import { IUser } from '@/types/user';
+import DiscordActivity from '@/components/cards/discord_activity';
+import H2 from '@/components/typography/h2';
 import Image from 'next/image';
+import moment from 'moment';
+import { AcademicCapIcon, CodeBracketIcon, DocumentTextIcon } from '@heroicons/react/24/solid';
+import { getUser } from '@/utils/getUser';
 
-export default function AboutPage() {
-  const [discord, setDiscord] = useState<IUser['social']['discord']>();
-  const { user } = useFetchUser();
-  const mainActivity = discord?.activities?.find((activity) => activity.type === 0 || activity.type === 2);
-
-  useEffect(() => {
-    function handler(data: ILanyardReponse) {
-      setDiscord(data);
-      console.log(data);
-    }
-
-    if (lanyard) {
-      lanyard.on(LanyardSocketEvents.initState, handler);
-      lanyard.on(LanyardSocketEvents.presenceUpdate, handler);
-    } else {
-      setDiscord(user?.social.discord);
-    }
-
-    return () => {
-      if (lanyard) {
-        lanyard.off(LanyardSocketEvents.initState, handler);
-        lanyard.off(LanyardSocketEvents.presenceUpdate, handler);
-      }
-    };
-  }, [user]);
+export default async function AboutxPage() {
+  const user = await getUser();
+  const aboutCells = [
+    { title: 'First name', value: user.firstName },
+    { title: 'Secondary name', value: user.secondaryName },
+    { title: "Father's last name", value: user.fathersName },
+    { title: "Mother's last name", value: user.mothersName },
+    { title: 'Gender', value: user.gender },
+    { title: 'Birthdate', value: moment(user.birthdate).format('L') },
+    { title: 'Age', value: user.age },
+    { title: 'Birthday', value: moment(user.birthday?.date).format('L') },
+  ];
 
   return (
-    <div>
-      <div className={'bg-medium-spring-green dark:bg-prussian-blue rounded-lg'}>
-        <main className='px-5 py-4'>
-          <div className='grid grid-cols-6'>
-            <div className=''>
-              <Image
-                src={`https://api.lanyard.rest/${discord?.discord_user?.id}.webp`}
-                alt={discord?.discord_user?.username ? `${discord?.discord_user?.username} avatar` : 'avatar'}
-                priority
-                className='block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0'
-                width={96}
-                height={0}
-              />
+    <div className={'h-fit w-full m-2'}>
+      <div className={'md:flex no-wrap md:space-x-2 max-md:space-y-2'}>
+        <div className={'col-span-2 w-full md:w-3/12 space-y-2'}>
+          <div
+            className={
+              'bg-medium-spring-green dark:bg-prussian-blue p-3 rounded-lg flex flex-col justify-center items-center'
+            }
+          >
+            <Image
+              src={user.social.github.avatar_url}
+              alt={user.social.github.username ?? (`${user.social.github.username} avatar` || 'avatar')}
+              priority
+              className={'h-auto w-fit mx-auto rounded-full'}
+              sizes={'70vw'}
+              width={0}
+              height={0}
+            />
+          </div>
+          <div
+            className={
+              'bg-medium-spring-green dark:bg-prussian-blue p-3 rounded-lg flex flex-col justify-center items-center'
+            }
+          >
+            {user.fullName && <p className={'font-bold text-lg text-center leading-8 my-1'}>{user.fullName}</p>}
+            {user.jobTitle && <p className={'font-lg text-center leading-6'}>{user.jobTitle}</p>}
+          </div>
+          <DiscordActivity user={user} />
+        </div>
+        <div className={'w-full space-y-2'}>
+          <div className={'bg-medium-spring-green dark:bg-prussian-blue p-3 shadow-sm rounded-lg'}>
+            <div className={'flex items-center space-x-2 font-semibold leading-8 mb-3'}>
+              <DocumentTextIcon className={'h-6 w-6'} />
+              <H2>About</H2>
             </div>
-            <div className='col-span-3 px-3 font-semibold flex flex-col'>
-              <div className=''>{discord?.discord_user?.display_name}</div>
-              <div className='text-sm text-gray-400 font-light'>{discord?.discord_user?.username}</div>
-              <div className='text-sm text-gray-400 font-light'>{discord?.discord_status}</div>
+            <div>
+              <div className={'grid md:grid-cols-2 text-sm'}>
+                {aboutCells.map(
+                  (cell, index) =>
+                    cell.value && (
+                      <div key={index} className={'grid grid-cols-2'}>
+                        <p className={'px-4 py-2 font-semibold'}>{cell.title}</p>
+                        <p className={'px-4 py-2'}>{cell.value}</p>
+                      </div>
+                    )
+                )}
+              </div>
             </div>
           </div>
-        </main>
-        {mainActivity && (
-          <footer className='px-5 py-4 text-blue-600'>
-            {Activities[mainActivity?.type]} {mainActivity?.name}
-          </footer>
-        )}
-      </div>
-      <div className='py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6'>
-        <Image
-          src={`https://api.lanyard.rest/${discord?.discord_user?.id}.webp`}
-          alt={discord?.discord_user?.username ? `${discord?.discord_user?.username} avatar` : 'avatar'}
-          priority
-          className='block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0'
-          width={96}
-          height={0}
-        />
-        <div className='text-center space-y-2 sm:text-left'>
-          <div className='space-y-0.5'>
-            <p className='text-lg text-black font-semibold'>{discord?.discord_user?.display_name}</p>
-            <p className='text-slate-500 font-medium'>{discord?.discord_user?.username}</p>
+          <div>
+            <div className={'grid md:grid-cols-2 max-md:space-y-2 md:space-x-2 text-sm'}>
+              <div className={'bg-medium-spring-green dark:bg-prussian-blue p-3 shadow-sm rounded-lg'}>
+                <div className={'flex items-center space-x-2 font-semibold leading-8 mb-3'}>
+                  <CodeBracketIcon className={'w-6 h-6'} />
+                  <H2>Tecnologies</H2>
+                </div>
+                <ul className={'list-inside list-disc grid grid-cols-2 gap-2'}>
+                  {user.technologies?.length ? (
+                    user.technologies
+                      ?.sort((a, b) => (a > b ? 1 : -1))
+                      .map((technology, index) => <li key={index}>{technology}</li>)
+                  ) : (
+                    <li>{'None'}</li>
+                  )}
+                </ul>
+              </div>
+              <div className={'bg-medium-spring-green dark:bg-prussian-blue p-3 shadow-sm rounded-lg'}>
+                <div className={'flex items-center space-x-2 font-semibold leading-8 mb-3'}>
+                  <AcademicCapIcon className={'w-6 h-6'} />
+                  <H2>Education</H2>
+                </div>
+                <ul className={'list-inside list-disc grid gap-2'}>
+                  {user.education?.length ? (
+                    user.education
+                      ?.sort((a, b) => (a > b ? 1 : -1))
+                      .map((school, index) => <li key={index}>{school}</li>)
+                  ) : (
+                    <li>{'None'}</li>
+                  )}
+                </ul>
+              </div>
+            </div>
           </div>
-          {mainActivity && (
-            <p className='py-1 text-sm text-purple-600'>
-              {Activities[mainActivity?.type]} {mainActivity?.name}
-            </p>
-          )}
         </div>
       </div>
     </div>

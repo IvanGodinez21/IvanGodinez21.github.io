@@ -1,5 +1,5 @@
-import User from '@/classes/user';
 import { AppProps } from 'next/app';
+import { IUser } from './user';
 import { NextFont } from 'next/dist/compiled/@next/font';
 import { NextPage } from 'next';
 import { ReactNode } from 'react';
@@ -21,5 +21,5 @@ export type IAppPropsWithLayout = AppProps & {
 };
 
 export interface IAppState {
-  user: User;
+  user: IUser;
 }

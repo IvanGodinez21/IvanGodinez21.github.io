@@ -1,16 +1,16 @@
-import { Octokit } from 'octokit';
 import { ILanyardReponse } from './lanyard';
+import { Octokit } from 'octokit';
 
-export interface IUser {
-  birthdate?: Date | string | null;
-  birthday?: string;
+export interface IUserConstructor {
+  birthdate?: Date;
   email?: string;
   fathersName?: string;
   firstName?: string;
-  fullName?: string;
+  gender?: '♂️' | '♀️' | '⚧️' | '❓' | string;
+  jobTitle?: string;
   mothersName?: string;
-  username?: string;
   secondaryName?: string;
+  education?: string[];
   social: {
     discord: { username?: string; id?: string } & Partial<ILanyardReponse>;
     facebook: {
@@ -21,24 +21,31 @@ export interface IUser {
       username?: string;
     };
     telegram: {
-      telephone?: IUser['telephone'];
+      telephone?: IUserConstructor['telephone'];
       username?: string;
     };
     twitter: {
       username?: string;
     };
     whatsapp: {
-      telephone?: IUser['telephone'];
+      telephone?: IUserConstructor['telephone'];
     };
   };
+  technologies?: string[];
   telephone?: `+${number}`;
-  nextBirthDay?: {
-    date: Date;
-    countdown: {
+  username?: string;
+}
+
+export interface IUser extends IUserConstructor {
+  age?: number;
+  birthday?: {
+    countDown: {
       days: number;
       hours: number;
       minutes: number;
       seconds: number;
     };
+    date: Date;
   };
+  fullName?: string;
 }

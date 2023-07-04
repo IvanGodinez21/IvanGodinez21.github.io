@@ -54,10 +54,12 @@ export default function ProjectsPage() {
         <Link
           key={repo.id}
           href={repo.html_url}
+          target={'_blank'}
+          rel={'noopener noreferrer'}
           className={`${repo.private ? 'cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <div
-            className={`bg-medium-spring-green dark:bg-prussian-blue shadow-md rounded-md p-4 hover:shadow-lg transition-shadow ${
+            className={`bg-medium-spring-green dark:bg-prussian-blue shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow ${
               i !== repos.length - 1 ? 'mb-2' : ''
             } ${i !== 0 ? 'mt-2' : ''}`}
           >

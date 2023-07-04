@@ -1,15 +1,20 @@
-import { IUser } from '@/types/user';
+import moment from 'moment';
+import { IUser, IUserConstructor } from '@/types/user';
 
 const override = process.env.NEXT_PUBLIC_OVERRIDE?.toLowerCase() === 'true' ?? false;
 
 export default class User implements IUser {
   public birthdate: IUser['birthdate'];
   public email: IUser['email'];
+  public education: IUser['education'];
   public fathersName: IUser['fathersName'];
   public firstName: IUser['firstName'];
+  public gender: IUser['gender'];
+  public jobTitle: IUser['jobTitle'];
   public mothersName: IUser['mothersName'];
   public secondaryName: IUser['secondaryName'];
   public _social: IUser['social'];
+  public technologies: IUser['technologies'];
   public telephone: IUser['telephone'];
   public username: IUser['username'];
 
@@ -18,81 +23,57 @@ export default class User implements IUser {
     email,
     fathersName,
     firstName,
+    gender,
+    jobTitle,
     mothersName,
     username,
     secondaryName,
+    education,
     social,
+    technologies,
     telephone,
-  }: IUser) {
+  }: IUserConstructor) {
     this.username = username;
-    this.birthdate = birthdate ? new Date(birthdate) ?? undefined : undefined;
+    this.birthdate = birthdate;
     this.email = email;
     this.fathersName = fathersName;
     this.firstName = firstName;
+    this.gender = gender;
+    this.jobTitle = jobTitle;
     this.mothersName = mothersName;
     this.secondaryName = secondaryName;
+    this.education = education;
     this._social = social;
+    this.technologies = technologies;
     this.telephone = telephone;
   }
 
-  public get age(): number | undefined {
+  public get age(): IUser['age'] {
     if (!this.birthdate) return undefined;
-    if (typeof this.birthdate === 'string') this.birthdate = new Date(this.birthdate);
-    return Math.abs(new Date(Date.now() - this.birthdate.getTime()).getUTCFullYear() - 1970);
+    return moment().diff(this.birthdate, 'years');
   }
 
-  public get birthday(): string | undefined {
+  public get birthday(): IUser['birthday'] {
     if (!this.birthdate) return undefined;
-    if (typeof this.birthdate === 'string') this.birthdate = new Date(this.birthdate);
-    return `${this.birthdate.getMonth() + 1}/${this.birthdate.getDate()}`;
-  }
-
-  public get fullName(): string | undefined {
-    const envName = `${this.firstName}${this.secondaryName ? ` ${this.secondaryName}` : ''} ${this.fathersName}${
-      this.mothersName ? ` ${this.mothersName}` : ''
-    }`;
-    if (!envName.includes('undefined')) return envName;
-    if (this._social.github.name) return this._social.github.name;
-    return undefined;
-  }
-
-  public get nextBirthDay():
-    | {
-        date: Date;
-        countdown: {
-          days: number;
-          hours: number;
-          minutes: number;
-          seconds: number;
-        };
-      }
-    | undefined {
-    if (!this.birthdate) return undefined;
-    if (typeof this.birthdate === 'string') this.birthdate = new Date(this.birthdate);
-    const today = new Date();
-    const birthdate = new Date(today.getFullYear(), this.birthdate.getMonth(), this.birthdate.getDate());
-
-    if (birthdate < today) {
-      birthdate.setFullYear(birthdate.getFullYear() + 1);
-    }
-
-    const timeDiffMs = birthdate.getTime() - today.getTime();
-    const timeDiffSecs = Math.floor(timeDiffMs / 1000);
-
-    const seconds = timeDiffSecs % 60;
-    const minutes = Math.floor(timeDiffSecs / 60) % 60;
-    const hours = Math.floor(timeDiffSecs / (60 * 60)) % 24;
-    const days = Math.floor(timeDiffSecs / (60 * 60 * 24));
-
+    const birthday = moment(this.birthdate).set('year', moment().year());
+    const today = moment();
+    if (birthday.isBefore(today)) birthday.add(1, 'year');
+    const timeDiff = moment.duration(birthday.diff(today));
     return {
-      date: birthdate,
-      countdown: {
-        days,
-        hours,
-        minutes,
-        seconds,
+      countDown: {
+        days: Math.floor(timeDiff.asDays()),
+        hours: timeDiff.hours(),
+        minutes: timeDiff.minutes(),
+        seconds: timeDiff.seconds(),
       },
+      date: birthday.toDate(),
     };
+  }
+
+  public get fullName(): IUser['fullName'] {
+    const names = [this.firstName, this.secondaryName, this.fathersName, this.mothersName];
+    const name = names.filter((name) => name !== undefined).join(' ');
+    return name.length > 0 ? name : undefined;
   }
 
   public get social(): IUser['social'] {

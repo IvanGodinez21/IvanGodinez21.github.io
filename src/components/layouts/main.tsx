@@ -10,7 +10,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className={'bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-1 items-center justify-center'}>
-        <H1>{NextTools.pageName({ pathname })}</H1>
+        <H1 className={'font-bold first-letter:uppercase'}>{NextTools.pageName({ pathname })}</H1>
       </div>
       <div
         className={'bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-[9_9_0%] overflow-y-auto'}

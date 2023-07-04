@@ -1,8 +1,8 @@
-import User from '@/classes/user';
+import { IUser } from '@/types/user';
 import { useEffect, useState } from 'react';
 
-export function useFetchUser() {
-  const [user, setUser] = useState<User | undefined>(undefined);
+export function useFetchUser(): { user: IUser | undefined; isLoading: boolean; error: string | undefined } {
+  const [user, setUser] = useState<IUser | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
@@ -15,7 +15,7 @@ export function useFetchUser() {
         });
         if (response.ok) {
           const data = await response.json();
-          setUser(new User(data));
+          setUser(data);
         } else {
           setError('Error fetching user data');
         }

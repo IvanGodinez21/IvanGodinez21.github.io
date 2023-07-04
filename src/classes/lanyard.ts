@@ -1,16 +1,28 @@
-import { ILanyardOptions, ILanyardReponse } from '@/types/lanyard';
-import { LanyardSocketEvents, options } from '@/constants/lanyard';
+import { ILanyard, ILanyardConstructor, ILanyardReponse } from '@/types/lanyard';
+import { LanyardSocketEvents } from '@/constants/lanyard';
 
 export default class Lanyard {
+  public apiUrl: ILanyard['apiUrl'];
   private events: { [eventName: string]: ((user: ILanyardReponse) => void)[] };
+  public heartBeatPeriod?: ILanyard['heartBeatPeriod'];
   private socket?: WebSocket;
-  private socketMode?: ILanyardOptions['socketMode'];
-  public userId: ILanyardOptions['userId'];
+  public socketMode: ILanyard['socketMode'];
+  public userId: ILanyard['userId'];
+  public webSocketUrl: ILanyard['webSocketUrl'];
 
-  constructor(options: ILanyardOptions) {
-    this.socketMode = options.socketMode;
-    this.userId = options.userId;
+  constructor({
+    apiUrl = 'https://api.lanyard.rest/v1',
+    heartBeatPeriod = 1000 * 30,
+    socketMode = true,
+    userId,
+    webSocketUrl = 'wss://api.lanyard.rest/socket',
+  }: ILanyardConstructor) {
+    this.apiUrl = apiUrl;
     this.events = {};
+    this.heartBeatPeriod = heartBeatPeriod;
+    this.userId = userId;
+    this.socketMode = socketMode;
+    this.webSocketUrl = webSocketUrl;
     if (this.socketMode) this.createWebSocket();
   }
 
@@ -41,7 +53,7 @@ export default class Lanyard {
   }
 
   private createWebSocket({ attempt = 0 }: { attempt?: number } | undefined = {}) {
-    this.socket = new WebSocket(options.websocketUrl);
+    this.socket = new WebSocket(this.webSocketUrl);
     const subscription = typeof this.userId === 'string' ? 'subscribe_to_id' : 'subscribe_to_ids';
 
     this.socket.addEventListener('open', () => {
@@ -60,7 +72,7 @@ export default class Lanyard {
             op: 3,
           })
         );
-      }, options.heartBeatPeriod);
+      }, this.heartBeatPeriod);
 
       if (this.socket) {
         this.socket.onclose = () => {
@@ -84,13 +96,19 @@ export default class Lanyard {
 
   public async fetch(): Promise<ILanyardReponse | undefined> {
     if (typeof this.userId === 'string') {
-      return (await (await fetch(`${options.apiUrl}/users/${this.userId}`, { cache: 'no-cache' })).json()).data;
+      return (await (await fetch(`${this.apiUrl}/users/${this.userId}`, { cache: 'no-cache' })).json()).data;
     }
   }
 
-  public static async fetch({ userId }: { userId: ILanyardOptions['userId'] }): Promise<ILanyardReponse | undefined> {
+  public static async fetch({
+    apiUrl = 'https://api.lanyard.rest/v1',
+    userId,
+  }: {
+    apiUrl?: ILanyardConstructor['apiUrl'];
+    userId: ILanyardConstructor['userId'];
+  }): Promise<ILanyardReponse | undefined> {
     if (typeof userId === 'string') {
-      return (await (await fetch(`${options.apiUrl}/users/${userId}`, { cache: 'no-cache' })).json()).data;
+      return (await (await fetch(`${apiUrl}/users/${userId}`, { cache: 'no-cache' })).json()).data;
     }
   }
 

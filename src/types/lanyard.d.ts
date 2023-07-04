@@ -54,7 +54,12 @@ export interface ILanyardReponse {
   };
 }
 
-export interface ILanyardOptions {
+export interface ILanyardConstructor {
+  apiUrl?: `https://${string}` | `http://${string}`;
+  heartBeatPeriod?: number;
   socketMode?: boolean;
   userId: string | string[];
+  webSocketUrl?: `wss://${string}`;
 }
+
+export type ILanyard = Required<ILanyardConstructor>;

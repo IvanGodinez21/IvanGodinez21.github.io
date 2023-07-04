@@ -1,11 +1,11 @@
 import { DOMAttributes, HTMLAttributes } from 'react';
 
-export default function H1({
+export default function H3({
   children,
   className,
 }: {
   children: DOMAttributes<HTMLHeadingElement>['children'];
   className?: HTMLAttributes<HTMLHeadingElement>['className'];
 }) {
-  return <h1 className={[className, 'text-2xl'].filter(Boolean).join(' ')}>{children}</h1>;
+  return <h2 className={[className, 'text-lg'].filter(Boolean).join(' ')}>{children}</h2>;
 }

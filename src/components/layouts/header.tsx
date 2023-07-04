@@ -1,4 +1,4 @@
-import { IUser } from '@/types/user.js';
+import { IUser } from '@/types/user';
 import Menu from '../menu';
 
 export default async function Header({ user }: { user: IUser }) {

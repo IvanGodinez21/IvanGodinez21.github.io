@@ -1,7 +1,7 @@
-import User from '@/classes/user';
 import { cache } from 'react';
+import { IUser } from '@/types/user';
 
-export const getUser = cache(async () => {
+export const getUser = cache(async (): Promise<IUser> => {
   const user = await (await (await import('@/app/api/user/route')).GET()).json();
-  return new User(user);
+  return user;
 });
