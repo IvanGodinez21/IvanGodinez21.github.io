@@ -6,8 +6,9 @@ export default function MenuButton({ state }: { state: [boolean, Dispatch<SetSta
 
   return (
     <button
-      aria-label={'Open main menu'}
+      aria-label={'Toggle main menu button'}
       className={'btn-navbar-icon'}
+      title={'Toggle main menu'}
       type={'button'}
       data-collapse-toggle={'navbar-sticky'}
       aria-controls={'navbar-sticky'}

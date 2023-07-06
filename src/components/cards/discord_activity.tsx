@@ -39,8 +39,8 @@ export default function DiscordActivity({ user }: { user: IUser }) {
             'bg-medium-spring-green dark:bg-prussian-blue p-3 rounded-lg flex flex-col justify-center items-center'
           }
         >
-          <p>
-            {Activities[mainActivity?.type]} {mainActivity?.name}
+          <p className={'text-center'}>
+            <span className={'font-semibold'}>{Activities[mainActivity?.type]}</span> {mainActivity?.name}
           </p>
         </div>
       )}

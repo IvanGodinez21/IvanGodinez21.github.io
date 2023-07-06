@@ -5,6 +5,7 @@ const override = process.env.NEXT_PUBLIC_OVERRIDE?.toLowerCase() === 'true' ?? f
 
 export default class User implements IUser {
   public birthdate: IUser['birthdate'];
+  public description: IUser['description'];
   public email: IUser['email'];
   public education: IUser['education'];
   public fathersName: IUser['fathersName'];
@@ -20,21 +21,22 @@ export default class User implements IUser {
 
   constructor({
     birthdate,
+    description,
     email,
     fathersName,
     firstName,
     gender,
     jobTitle,
     mothersName,
-    username,
     secondaryName,
     education,
     social,
     technologies,
     telephone,
+    username,
   }: IUserConstructor) {
-    this.username = username;
     this.birthdate = birthdate;
+    this.description = description;
     this.email = email;
     this.fathersName = fathersName;
     this.firstName = firstName;
@@ -46,6 +48,7 @@ export default class User implements IUser {
     this._social = social;
     this.technologies = technologies;
     this.telephone = telephone;
+    this.username = username;
   }
 
   public get age(): IUser['age'] {

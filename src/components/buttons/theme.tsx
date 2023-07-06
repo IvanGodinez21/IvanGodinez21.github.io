@@ -20,11 +20,16 @@ export default function ThemeButton() {
 
   return (
     <button
-      className={'btn-navbar-icon'}
-      type={'button'}
       aria-label={'Toggle theme mode button'}
+      className={'btn-navbar-icon'}
+      title={'Toggle theme'}
+      type={'button'}
       onClick={() => {
         setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setTheme('system');
       }}
     >
       {themeIcon}

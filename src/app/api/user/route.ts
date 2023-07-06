@@ -9,12 +9,11 @@ export async function GET() {
 }
 
 async function fetchUser() {
-  const discord = process.env.NEXT_PUBLIC_DISCORD_ID
-    ? await Lanyard.fetch({ userId: process.env.NEXT_PUBLIC_DISCORD_ID })
-    : undefined;
+  const discord = process.env.DISCORD_ID ? await Lanyard.fetch({ userId: process.env.DISCORD_ID }) : undefined;
   const github = (await octokit.rest.users.getAuthenticated()).data;
   return new User({
     birthdate: process.env.BIRTHDATE ? moment(process.env.BIRTHDATE).toDate() : undefined,
+    description: process.env.DESCRIPTION,
     email: process.env.EMAIL,
     education: process.env.EDUCATION?.split(', '),
     fathersName: process.env.FATHERS_NAME,

@@ -3,6 +3,7 @@ import { Octokit } from 'octokit';
 
 export interface IUserConstructor {
   birthdate?: Date;
+  description?: string;
   email?: string;
   fathersName?: string;
   firstName?: string;

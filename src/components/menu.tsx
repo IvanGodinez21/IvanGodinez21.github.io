@@ -13,15 +13,9 @@ export default function Menu({ user }: { user: IUser }) {
   const [, setNavHidden] = useNavHidden;
   const routes: IRoute[] = [
     {
-      name: 'home',
-      path: function () {
-        return '/';
-      },
-    },
-    {
       name: 'about',
       path: function () {
-        return `/${this.name}`;
+        return '/';
       },
     },
     {
@@ -42,9 +36,10 @@ export default function Menu({ user }: { user: IUser }) {
     <div className={'flex flex-wrap justify-between mx-2'}>
       <div className={'flex max-lg:order-1 max-sm:order-2'}>
         <Link
+          aria-label={'Redirect to start page'}
+          title={'Start page'}
           className={'flex items-center btn-navbar-icon'}
           href={'/'}
-          aria-label={'Redirect to home page'}
           onClick={() => setNavHidden(true)}
         >
           {(user.username ?? user.fullName) && (

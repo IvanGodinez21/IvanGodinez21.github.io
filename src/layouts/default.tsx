@@ -8,14 +8,14 @@ export default async function DefaultLayout({ children }: ILayout) {
   const user = await getUser();
 
   return (
-    <div className={'flex flex-col h-screen'}>
-      <header className={'sticky top-0 w-full '}>
+    <div className={'flex flex-col h-screen w-screen'}>
+      <header className={'sticky w-full'}>
         <Header user={user} />
       </header>
       <main className={'flex flex-col flex-1 m-4 space-y-2 overflow-y-hidden'}>
         <Main>{children}</Main>
       </main>
-      <footer className={'sticky bottom-0 w-full'}>
+      <footer className={'sticky w-full'}>
         <Footer user={user} />
       </footer>
     </div>

@@ -10,7 +10,9 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "ignorePatterns": [
-    "next.config.js"
+    "postcss.config.js",
+    "next.config.js",
+    "tailwind.config.js"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
