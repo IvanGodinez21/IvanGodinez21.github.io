@@ -1,7 +1,13 @@
 import { Bars3Icon } from '@heroicons/react/24/solid';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function MenuButton({ state }: { state: [boolean, Dispatch<SetStateAction<boolean>>] }) {
+export default function MenuButton({
+  id,
+  state,
+}: {
+  id?: string;
+  state: [boolean, Dispatch<SetStateAction<boolean>>];
+}) {
   const [navHidden, setNavHidden] = state;
 
   return (
@@ -10,8 +16,8 @@ export default function MenuButton({ state }: { state: [boolean, Dispatch<SetSta
       className={'btn-navbar-icon'}
       title={'Toggle main menu'}
       type={'button'}
-      data-collapse-toggle={'navbar-sticky'}
-      aria-controls={'navbar-sticky'}
+      data-collapse-toggle={id}
+      aria-controls={id}
       aria-expanded={!navHidden}
       onClick={() => setNavHidden(!navHidden)}
       onBlur={(e) => {

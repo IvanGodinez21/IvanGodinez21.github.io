@@ -3,22 +3,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function Nav({
+export default function MenuList({
+  id,
   routes,
   state,
 }: {
+  id?: string;
   routes: IRoute[];
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const [navHidden, setNavHidden] = state;
+  const [, setNavHidden] = state;
   const pathname = usePathname();
   return (
-    <nav
-      className={`lg:order-2 md:order-4 max-md:order-4 max-md:mt-4 max-sm:order-4 justify-between items-center w-full lg:flex lg:w-auto md:flex md:w-auto${
-        navHidden ? ' hidden' : ''
-      }`}
-      id={'navbar-sticky'}
-    >
+    <nav id={id}>
       <ul
         className={
           'flex flex-col rounded-lg max-md:ring-2 max-md:bg-tea-green dark:max-md:bg-gunmetal md:flex-row md:space-x-4 md:text-sm md:font-medium ring-gunmetal dark:ring-tea-green max-md:text-gunmetal dark:max-md:text-tea-green'

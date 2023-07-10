@@ -1,9 +1,9 @@
 'use client';
 
-import { content } from '@/contexts/scroll_ref';
 import H1 from '@/components/typography/h1';
-import { usePathname } from 'next/navigation';
 import NextTools from '@/classes/next_tools';
+import { content } from '@/contexts/scroll_ref';
+import { usePathname } from 'next/navigation';
 
 export default function Main({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
