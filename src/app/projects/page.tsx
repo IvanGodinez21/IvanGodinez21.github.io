@@ -1,6 +1,8 @@
 'use client';
 
+import H2 from '@/components/typography/h2';
 import Link from 'next/link';
+import { ArrowTrendingUpIcon, EyeIcon, StarIcon } from '@heroicons/react/24/solid';
 import { content } from '@/contexts/scroll_ref';
 import { IRepo } from '@/types/repos';
 import { useEffect, useState } from 'react';
@@ -39,7 +41,7 @@ export default function ProjectsPage() {
     if (!archived) return isPrivate({ privacy });
     return (
       <span
-        className={`inline-block rounded px-2 py-1 text-sm  text-white ${
+        className={`inline-block rounded px-2 py-1 text-sm text-white text-center ${
           archived && !privacy ? 'bg-yellow-500' : 'bg-orange-500'
         }`}
       >
@@ -49,7 +51,7 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className={'h-fit w-full m-2'}>
+    <div className={'h-fit w-fit m-2'}>
       {repos?.map((repo, i, repos) => (
         <Link
           key={repo.id}
@@ -63,27 +65,39 @@ export default function ProjectsPage() {
               i !== repos.length - 1 ? 'mb-2' : ''
             } ${i !== 0 ? 'mt-2' : ''}`}
           >
-            <div className={'flex items-center mb-2'}>
+            <div className={'flex gap-2 items-center mb-2'}>
               {status({ privacy: repo.private, archived: repo.archived })}
-              <h3 className={'text-gunmetal dark:text-tea-green text-lg font-medium ml-2'}>
+              <H2 className={'font-medium break-all'}>
                 {repo.owner.login}/{repo.name}
-              </h3>
+              </H2>
             </div>
             <p className={'mt-1'}>{repo.description}</p>
-            <div className={'flex items-center mt-2'}>
+            <div className={'flex flex-wrap gap-2 items-center mt-2'}>
               {repo.language && (
-                <span className={'inline-block bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm mr-2'}>
-                  {repo.language}
+                <span title={'Language'} className={'bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm'}>
+                  <p>{repo.language}</p>
                 </span>
               )}
-              <span className={'inline-block bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm mr-2'}>
-                {repo.stargazers_count} stars
+              <span
+                title={'Stars'}
+                className={'flex flex-row space-x-2 bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm'}
+              >
+                <StarIcon className={'w-5 h-5'} />
+                <p>{repo.stargazers_count}</p>
               </span>
-              <span className={'inline-block bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm mr-2'}>
-                {repo.watchers_count} watchers
+              <span
+                title={'Watchers'}
+                className={'flex flex-row space-x-2 bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm'}
+              >
+                <EyeIcon className={'w-5 h-5'} />
+                <p>{repo.watchers_count}</p>
               </span>
-              <span className={'inline-block bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm mr-2'}>
-                {repo.forks_count} forks
+              <span
+                title={'Forks'}
+                className={'flex flex-row space-x-2 bg-keppel dark:bg-cadet-blue rounded-full px-3 py-1 text-sm'}
+              >
+                <ArrowTrendingUpIcon className={'w-5 h-5'} />
+                <p>{repo.forks_count}</p>
               </span>
             </div>
           </div>
