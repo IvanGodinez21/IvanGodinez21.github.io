@@ -1,5 +1,6 @@
 import CustomThemeProvider from '@/providers/custom_theme_provider';
 import DefaultLayout from '@/layouts/default';
+import { Analytics } from '@vercel/analytics/react';
 import { getUser } from '@/utils/getUser';
 import { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomThemeProvider>
           <DefaultLayout>{children}</DefaultLayout>
         </CustomThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
