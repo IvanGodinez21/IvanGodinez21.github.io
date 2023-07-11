@@ -1,4 +1,3 @@
-export interface IRoute {
+export interface IRouteConstructor {
   name: string;
-  path(): IRoute['name'];
 }

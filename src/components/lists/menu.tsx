@@ -1,7 +1,7 @@
-import { IRoute } from '@/types/route';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Route from '@/classes/route';
 import { Dispatch, SetStateAction } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function MenuList({
   id,
@@ -9,7 +9,7 @@ export default function MenuList({
   state,
 }: {
   id?: string;
-  routes: IRoute[];
+  routes: Route[];
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
   const [, setNavHidden] = state;
@@ -24,8 +24,8 @@ export default function MenuList({
         {routes.map((route, index) => (
           <li key={index}>
             <Link
-              className={`btn-navbar-category ${pathname === route.path() ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
-              href={route.path()}
+              className={`btn-navbar-category ${pathname === route.path ? 'bg-cadet-blue dark:bg-keppel' : ''}`}
+              href={route.path}
               onClick={() => setNavHidden(true)}
             >
               {route.name[0].toUpperCase() + route.name.slice(1)}

@@ -4,32 +4,12 @@ import Link from 'next/link';
 import MenuList from '../lists/menu';
 import MenuButton from '../buttons/menu';
 import ThemeButton from '../buttons/theme';
-import { IRoute } from '@/types/route';
 import { IUser } from '@/types/user';
 import { useState } from 'react';
+import { routes } from '@/constants/routes';
 
 export default function Header({ user }: { user: IUser }) {
   const [navHidden, setNavHidden] = useState<boolean>(true);
-  const routes: IRoute[] = [
-    {
-      name: 'about',
-      path: function () {
-        return '/';
-      },
-    },
-    {
-      name: 'projects',
-      path: function () {
-        return `/${this.name}`;
-      },
-    },
-    {
-      name: 'contact',
-      path: function () {
-        return `/${this.name}`;
-      },
-    },
-  ];
 
   return (
     <div className={'p-2 shadow bg-emerald text-gunmetal'}>
