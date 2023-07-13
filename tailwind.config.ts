@@ -1,10 +1,8 @@
-module.exports = {
-  content: [
-    './src/**/*.{vue,js,ts}',
-    './nuxt.config.{js,ts}',
-    './node_modules/flowbite/**/*.js',
-  ],
-  darkMode: 'class',
+import { Config } from 'tailwindcss';
+
+const tailwindcssConfig: Config = {
+  content: ['./src/**/*.{jsx,tsx,js,ts,vue}'],
+  darkMode: ['class'],
   theme: {
     extend: {
       colors: {
@@ -21,5 +19,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [],
 };
+
+export default tailwindcssConfig;

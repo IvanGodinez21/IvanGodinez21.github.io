@@ -1,0 +1,50 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": [
+    "postcss.config.{js,ts}",
+    "nuxt.config.{js,ts}",
+    "tailwind.config.{js,ts}"
+  ],
+  "overrides": [],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "root": true,
+  "rules": {
+    "arrow-parens": "off",
+    "comma-dangle": "off",
+    "curly": "off",
+    "no-console": "off",
+    "import/no-named-as-default-member": "off",
+    "space-before-function-paren": "off",
+    "vue/multi-word-component-names": "off",
+    "indent": [
+      "warn",
+      2,
+      { "SwitchCase": 1 }
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ]
+  }
+}

@@ -1,100 +1,82 @@
 {
-    "version": "0.2.0",
-    "compounds": [
-      {
-        "name": "Build & debug (development)",
-        "configurations": ["Server: development"],
-        "preLaunchTask": "Build"
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Client",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server [development]",
+      "console": "integratedTerminal",
+      "args": [
+        "dev"
+      ],
+      "env": {
+        "NODE_OPTIONS": "--inspect"
       },
-      {
-        "name": "Build & debug (production)",
-        "configurations": ["Server: production"],
-        "preLaunchTask": "Build"
+      "linux": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
       },
-      {
-        "name": "Build & debug (development + client)",
-        "configurations": ["Server: development", "Client"],
-        "preLaunchTask": "Build"
+      "osx": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
       },
-      {
-        "name": "Build & debug (production + client)",
-        "configurations": ["Server: production", "Client"],
-        "preLaunchTask": "Build"
+      "serverReadyAction": {
+        "killOnServerStop": true,
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
       },
-      {
-        "name": "Debug (development)",
-        "configurations": ["Server: development"]
-      },
-      {
-        "name": "Debug (production)",
-        "configurations": ["Server: production"]
-      },
-      {
-        "name": "Debug (development + client)",
-        "configurations": ["Server: development", "Client"]
-      },
-      {
-        "name": "Debug (production + client)",
-        "configurations": ["Server: production", "Client"]
-      },
-      {
-        "name": "Install, build & debug (development)",
-        "configurations": ["Server: development"],
-        "preLaunchTask": "Install & build"
-      },
-      {
-        "name": "Install, build & debug (production)",
-        "configurations": ["Server: production"],
-        "preLaunchTask": "Install & build"
-      },
-      {
-        "name": "Install, build & debug (development + client)",
-        "configurations": ["Server: development", "Client"],
-        "preLaunchTask": "Install & build"
-      },
-      {
-        "name": "Install, build & debug (production + client)",
-        "configurations": ["Server: production", "Client"],
-        "preLaunchTask": "Install & build"
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
       }
-    ],
-    "configurations": [
-        {
-          "type": "msedge",
-          "request": "launch",
-          "name": "Client",
-          "url": "http://localhost:3000",
-          "webRoot": "${workspaceFolder}"
-        },
-        {
-          "type": "node",
-          "request": "launch",
-          "name": "Server: development",
-          "args": ["dev"],
-          "osx": {
-            "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-          },
-          "linux": {
-            "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-          },
-          "windows": {
-            "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
-          }
-        },
-        {
-          "type": "node",
-          "request": "launch",
-          "name": "Server: production",
-          "args": ["start"],
-          "osx": {
-            "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-          },
-          "linux": {
-            "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-          },
-          "windows": {
-            "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
-          }
-        },
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server [production]",
+      "args": [
+        "start"
+      ],
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_OPTIONS": "--inspect"
+      },
+      "linux": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
+      },
+      "osx": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
+      },
+      "serverReadyAction": {
+        "killOnServerStop": true,
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
+      },
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
+      }
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Debug Fullstack [development]",
+      "configurations": [
+        "Debug Server [development]",
+        "Client"
       ]
-  }
+    },
+    {
+      "name": "Debug Fullstack [production]",
+      "configurations": [
+        "Debug Server [production]",
+        "Client"
+      ]
+    }
+  ]
+}
