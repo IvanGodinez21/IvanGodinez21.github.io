@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { IUser, IUserConstructor } from '@/types/user';
 
-const override = process.env.USERNAME_OVERRIDE?.toLowerCase() === 'true' ?? false;
+const override = process.env.USER_NAME_OVERRIDE?.toLowerCase() === 'true' ?? false;
 
 export default class User implements IUser {
   public birthdate: IUser['birthdate'];
