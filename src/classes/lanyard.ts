@@ -33,7 +33,7 @@ export default class Lanyard {
     }
   }
 
-  public async on(eventName: LanyardSocketEvents, handler: (user: ILanyardReponse) => void) {
+  public on(eventName: LanyardSocketEvents, handler: (user: ILanyardReponse) => void) {
     if (!this.socketMode) throw new Error('Socket mode is disabled');
     if (!this.events[eventName]) {
       this.events[eventName] = [];

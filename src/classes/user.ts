@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { IUser, IUserConstructor } from '@/types/user';
 
-const override = process.env.NEXT_PUBLIC_OVERRIDE?.toLowerCase() === 'true' ?? false;
+const override = process.env.USER_NAME_OVERRIDE?.toLowerCase() === 'true' ?? false;
 
 export default class User implements IUser {
   public birthdate: IUser['birthdate'];
@@ -130,7 +130,7 @@ export default class User implements IUser {
 
     Object.entries(Object.getOwnPropertyDescriptors(proto))
       .filter(([, descriptor]) => typeof descriptor.get === 'function')
-      .map(([key, descriptor]) => {
+      .forEach(([key, descriptor]) => {
         if (descriptor && key[0] !== '_') {
           try {
             const val = descriptor.get?.call(this);
