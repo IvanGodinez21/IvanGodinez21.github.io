@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { IUser } from 'types/user';
 
-const { data } = await useFetch('/api/user');
-const user = data.value as IUser;
+const user = (await useFetch('/api/user')).data.value as IUser;
 
 useHead({
   title: `${user.username}'s website`,
@@ -15,11 +14,8 @@ useHead({
   ],
 });
 </script>
-<script lang="ts">
-export default {
-  layout: 'default',
-};
-</script>
 <template>
-  <NuxtLayout />
+  <NuxtLayout name="default" :user="user">
+    <NuxtPage />
+  </NuxtLayout>
 </template>

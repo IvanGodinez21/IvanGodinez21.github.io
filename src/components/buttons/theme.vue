@@ -1,27 +1,20 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, onMounted } from 'vue';
 import { MoonIcon, SunIcon } from '@heroicons/vue/24/solid';
 
-export default {
-  data() {
-    return {
-      showThemeIcon: false,
-    };
-  },
-  computed: {
-    themeIcon() {
-      return this.$colorMode.value === 'dark' ? MoonIcon : SunIcon;
-    },
-  },
-  mounted() {
-    this.showThemeIcon = true;
-  },
-};
+const showThemeIcon = ref(false);
+
+const themeIcon = computed(() => (useColorMode().value === 'dark' ? MoonIcon : SunIcon));
+
+onMounted(() => {
+  showThemeIcon.value = true;
+});
 </script>
 <template>
   <button
     v-if="showThemeIcon"
     aria-label="Toggle theme mode button"
-    className="btn-navbar-icon"
+    class="btn-navbar-icon"
     title="Toggle theme"
     type="button"
     @click="() => ($colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark')"

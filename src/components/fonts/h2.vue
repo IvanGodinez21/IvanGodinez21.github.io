@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <h1 :class="[props.class, 'text-2xl'].filter(Boolean).join(' ')">
+  <h2 :class="[props.class, 'text-xl'].filter(Boolean).join(' ')">
     <slot />
-  </h1>
+  </h2>
 </template>

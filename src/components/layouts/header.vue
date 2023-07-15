@@ -1,20 +1,12 @@
 <script lang="ts" setup>
-import { PropType } from 'vue';
 import { IUser } from '@/types/user';
 import { routes } from '@/constants/routes';
 
-const navHidden = useState<boolean>('navHidden', () => true);
-</script>
+const props = defineProps<{
+  user: IUser;
+}>();
 
-<script lang="ts">
-export default {
-  props: {
-    user: {
-      type: Object as PropType<IUser>,
-      required: true,
-    },
-  },
-};
+const navHidden = useState<boolean>('navHidden', () => true);
 </script>
 <template>
   <div class="p-2 shadow bg-emerald text-gunmetal">
@@ -26,8 +18,11 @@ export default {
           class="flex items-center btn-navbar-icon"
           to="/"
         >
-          <span v-if="user.username ?? user.fullName" class="self-center text-xl font-semibold whitespace-nowrap">
-            {{ user.username ? `@${user.username}` : user.fullName }}
+          <span
+            v-if="props.user.username ?? props.user.fullName"
+            class="self-center text-xl font-semibold whitespace-nowrap"
+          >
+            {{ props.user.username ? `@${props.user.username}` : props.user.fullName }}
           </span>
         </NuxtLink>
       </div>
