@@ -1,4 +1,4 @@
-import { ILanyardReponse } from './lanyard';
+import { ILanyardResponse } from './lanyard';
 import { Octokit } from 'octokit';
 
 export interface IUserConstructor {
@@ -13,7 +13,7 @@ export interface IUserConstructor {
   secondaryName?: string;
   education?: string[];
   social: {
-    discord: { username?: string; id?: string } & Partial<ILanyardReponse>;
+    discord: { username?: string; id?: string } & Partial<ILanyardResponse>;
     facebook: {
       username?: string;
     };

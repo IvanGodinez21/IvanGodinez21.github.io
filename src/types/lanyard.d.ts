@@ -1,4 +1,4 @@
-export interface ILanyardReponse {
+export interface ILanyardResponse {
   active_on_discord_desktop: boolean;
   active_on_discord_mobile: boolean;
   active_on_discord_web: boolean;

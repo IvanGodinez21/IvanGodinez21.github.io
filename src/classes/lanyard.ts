@@ -1,9 +1,9 @@
-import { ILanyard, ILanyardConstructor, ILanyardReponse } from '@/types/lanyard';
+import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
 import { LanyardSocketEvents } from '@/constants/lanyard';
 
 export default class Lanyard {
   public apiUrl: ILanyard['apiUrl'];
-  private events: { [eventName: string]: ((user: ILanyardReponse) => void)[] };
+  private events: { [eventName: string]: ((user: ILanyardResponse) => void)[] };
   public heartBeatPeriod?: ILanyard['heartBeatPeriod'];
   private socket?: WebSocket;
   public socketMode: ILanyard['socketMode'];
@@ -26,14 +26,14 @@ export default class Lanyard {
     if (this.socketMode) this.createWebSocket();
   }
 
-  private emit(eventName: string, user: ILanyardReponse) {
+  private emit(eventName: string, user: ILanyardResponse) {
     const handlers = this.events[eventName];
     if (handlers) {
       handlers.forEach((handler) => handler(user));
     }
   }
 
-  public on(eventName: LanyardSocketEvents, handler: (user: ILanyardReponse) => void) {
+  public on(eventName: LanyardSocketEvents, handler: (user: ILanyardResponse) => void) {
     if (!this.socketMode) throw new Error('Socket mode is disabled');
     if (!this.events[eventName]) {
       this.events[eventName] = [];
@@ -41,7 +41,7 @@ export default class Lanyard {
     this.events[eventName].push(handler);
   }
 
-  public off(eventName: LanyardSocketEvents, handler: (user: ILanyardReponse) => void) {
+  public off(eventName: LanyardSocketEvents, handler: (user: ILanyardResponse) => void) {
     if (!this.socketMode) throw new Error('Socket mode is disabled');
     const handlers = this.events[eventName];
     if (handlers) {
@@ -94,7 +94,7 @@ export default class Lanyard {
     });
   }
 
-  public async fetch(): Promise<ILanyardReponse | undefined> {
+  public async fetch(): Promise<ILanyardResponse | undefined> {
     if (typeof this.userId === 'string') {
       return (await (await fetch(`${this.apiUrl}/users/${this.userId}`, { cache: 'no-cache' })).json()).data;
     }
@@ -106,7 +106,7 @@ export default class Lanyard {
   }: {
     apiUrl?: ILanyardConstructor['apiUrl'];
     userId: ILanyardConstructor['userId'];
-  }): Promise<ILanyardReponse | undefined> {
+  }): Promise<ILanyardResponse | undefined> {
     if (typeof userId === 'string') {
       return (await (await fetch(`${apiUrl}/users/${userId}`, { cache: 'no-cache' })).json()).data;
     }
