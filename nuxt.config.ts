@@ -34,6 +34,7 @@ export default defineNuxtConfig({
       '@nuxtjs/google-fonts',
       {
         display: 'auto',
+        download: true,
         families: {
           Poppins: [500],
         },
