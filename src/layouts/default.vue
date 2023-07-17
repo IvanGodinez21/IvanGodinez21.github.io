@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { IUser } from 'types/user';
+import { IUser } from '@/types/user';
 
 const props = defineProps<{
   user: IUser;

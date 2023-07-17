@@ -1,5 +1,5 @@
-import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
 import { LanyardSocketEvents } from '@/constants/lanyard';
+import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
 
 export default class Lanyard {
   public apiUrl: ILanyard['apiUrl'];

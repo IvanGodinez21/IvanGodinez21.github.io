@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { IContactMethod } from 'types/contact';
-import { IUser } from 'types/user';
+import { IContactMethod } from '@/types/contact';
+import { IUser } from '@/types/user';
 
 const props = defineProps<{
   user: IUser;

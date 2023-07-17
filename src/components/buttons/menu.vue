@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { HTMLAttributes } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/24/solid';
+import { HTMLAttributes } from 'vue';
 
 const props = defineProps<{
   id: HTMLAttributes['aria-controls'];

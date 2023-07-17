@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { IUser } from 'types/user';
+import { IUser } from '@/types/user';
 
 const user = (await useFetch('/api/user')).data.value as IUser;
 
