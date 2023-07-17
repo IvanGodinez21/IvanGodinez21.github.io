@@ -7,8 +7,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "@nuxtjs/eslint-config-typescript",
-    "plugin:@typescript-eslint/recommended"
+    "@nuxtjs/eslint-config-typescript"
   ],
   "ignorePatterns": [
     "postcss.config.{js,ts}",
@@ -18,12 +17,9 @@
   "overrides": [],
   "parser": "vue-eslint-parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
-    "parser": "@typescript-eslint/parser"
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
   "root": true,
   "rules": {
     "arrow-parens": "off",
