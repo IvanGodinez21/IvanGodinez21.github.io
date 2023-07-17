@@ -14,7 +14,8 @@
     "@heroicons/vue": "^2.0.18",
     "@vercel/analytics": "^1.0.1",
     "moment": "^2.29.4",
-    "octokit": "^3.0.0"
+    "octokit": "^3.0.0",
+    "tsparticles-confetti": "^2.11.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
