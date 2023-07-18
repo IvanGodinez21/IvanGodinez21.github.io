@@ -60,17 +60,8 @@ export default class User implements IUser {
     if (!this.birthdate) return undefined;
     const birthday = moment(this.birthdate).set('year', moment().year());
     const today = moment();
-    if (birthday.isBefore(today)) birthday.add(1, 'year');
-    const timeDiff = moment.duration(birthday.diff(today));
-    return {
-      countDown: {
-        days: Math.floor(timeDiff.asDays()),
-        hours: timeDiff.hours(),
-        minutes: timeDiff.minutes(),
-        seconds: timeDiff.seconds(),
-      },
-      date: birthday.toDate(),
-    };
+    if (birthday.isBefore(today, 'day') && !birthday.isSame(today, 'day')) birthday.add(1, 'year');
+    return birthday.toDate();
   }
 
   public get fullName(): IUser['fullName'] {

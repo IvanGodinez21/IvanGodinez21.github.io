@@ -12,11 +12,11 @@ const navHidden = useState<boolean>('navHidden', () => true);
   <div class="p-2 shadow bg-emerald text-gunmetal">
     <div class="flex flex-wrap justify-between mx-2">
       <div class="flex max-lg:order-1 max-sm:order-2">
-        <NuxtLink
+        <button
           aria-label="Redirect to start page"
           title="Start page"
           class="flex items-center btn-navbar-icon"
-          to="/"
+          @click="() => useRouter().push({ path: '/' })"
         >
           <span
             v-if="props.user.username ?? props.user.fullName"
@@ -24,7 +24,7 @@ const navHidden = useState<boolean>('navHidden', () => true);
           >
             {{ props.user.username ? `@${props.user.username}` : props.user.fullName }}
           </span>
-        </NuxtLink>
+        </button>
       </div>
       <div class="flex md:hidden max-md:order-3">
         <ButtonsMenu id="header-nav" />

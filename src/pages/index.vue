@@ -12,7 +12,7 @@ const aboutCells = [
   { title: 'Gender', value: user.gender },
   { title: 'Birthdate', value: user.birthdate ? moment(user.birthdate).format('L') : undefined },
   { title: 'Age', value: user.age },
-  { title: 'Birthday', value: user.birthday?.date ? moment(user.birthday?.date).format('L') : undefined },
+  { title: 'Birthday', value: user.birthday ? moment(user.birthday).format('L') : undefined },
 ];
 </script>
 <template>
