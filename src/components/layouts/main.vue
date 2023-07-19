@@ -1,5 +1,12 @@
 <script lang="ts" setup>
 import NuxtTools from '@/classes/nuxt_tools';
+import { content as globalContent } from '@/contexts/scroll_ref';
+
+const content = ref<HTMLDivElement>();
+
+onMounted(() => {
+  globalContent.value = content.value;
+});
 </script>
 <template>
   <div class="flex flex-col w-full h-full space-y-2">
@@ -8,7 +15,7 @@ import NuxtTools from '@/classes/nuxt_tools';
         {{ NuxtTools.pageName({ pathname: $route.path }) }}
       </FontsH1>
     </div>
-    <div class="bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-[9_9_0%] overflow-y-auto">
+    <div ref="content" class="bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-[9_9_0%] overflow-y-auto">
       <slot />
     </div>
   </div>
