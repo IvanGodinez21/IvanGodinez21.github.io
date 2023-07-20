@@ -1,5 +1,5 @@
-import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
 import { LanyardSocketEvents } from '@/constants/lanyard';
+import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
 
 export default class Lanyard {
   public apiUrl: ILanyard['apiUrl'];
@@ -119,7 +119,7 @@ export default class Lanyard {
 
   public disconnect() {
     if (this.socket) {
-      this.socket.close();
+      if (this.socket.readyState !== WebSocket.CONNECTING) this.socket.close();
       this.socket = undefined;
     }
   }
