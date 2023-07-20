@@ -119,7 +119,7 @@ export default class Lanyard {
 
   public disconnect() {
     if (this.socket) {
-      this.socket.close();
+      if (this.socket.readyState !== WebSocket.CONNECTING) this.socket.close();
       this.socket = undefined;
     }
   }
