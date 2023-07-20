@@ -3,9 +3,8 @@ import { ArrowTrendingUpIcon, EyeIcon, StarIcon } from '@heroicons/vue/24/solid'
 import { content } from '@/contexts/scroll_ref';
 import { IRepo } from '@/types/repos';
 
-const page = ref(1);
-const x = await getRepos({ page: page.value });
-const repos = ref<IRepo[]>([]);
+const repos = useState<IRepo[]>('repos');
+const reposPage = useState<number>('reposPage');
 
 function getStatusText({ isArchived, isPrivate }: { isArchived: IRepo['archived']; isPrivate: IRepo['private'] }) {
   if (!isArchived) return isPrivate ? 'Private' : 'Public';
@@ -18,29 +17,25 @@ function getStatusClass({ isArchived, isPrivate }: { isArchived: IRepo['archived
 }
 
 async function getReposPage() {
-  const newRepos = await getRepos({ page: page.value });
-  const prevRepos = repos.value;
-  if (newRepos) repos.value = [...prevRepos, ...newRepos];
+  const newRepos = await getRepos({ page: reposPage.value });
+  repos.value = [...repos.value, ...newRepos];
 }
 
 async function handleScroll() {
   if (content?.value) {
     const scrollPosition = content.value.scrollHeight - content.value.clientHeight;
     if (Math.ceil(content.value.scrollTop) >= scrollPosition) {
-      page.value++;
+      reposPage.value++;
       await getReposPage();
     }
   }
 }
 
-onMounted(() => {
-  async function load() {
-    await getReposPage();
-    if (content?.value) {
-      content.value.addEventListener('scroll', handleScroll);
-    }
+onMounted(async () => {
+  if (!repos.value.length) await getReposPage();
+  if (content?.value) {
+    content.value.addEventListener('scroll', handleScroll);
   }
-  load();
 });
 
 onBeforeUnmount(() => {

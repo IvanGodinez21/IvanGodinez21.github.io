@@ -3,7 +3,7 @@ import { ArrowTopRightOnSquareIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/v
 import { IContactMethod } from '@/types/contact';
 import { IUser } from '@/types/user';
 
-const user = (await useFetch('/api/user')).data.value as IUser;
+const user = useState<IUser>('user').value;
 const contactMethods: IContactMethod[] = [
   {
     icon: '/icons/discord.svg',

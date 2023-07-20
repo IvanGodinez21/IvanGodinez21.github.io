@@ -3,7 +3,7 @@ import moment from 'moment';
 import { AcademicCapIcon, CodeBracketIcon, DocumentTextIcon, FingerPrintIcon } from '@heroicons/vue/24/solid';
 import { IUser } from '@/types/user';
 
-const user = (await useFetch('/api/user')).data.value as IUser;
+const user = useState<IUser>('user').value;
 const aboutCells = [
   { title: 'First name', value: user.firstName },
   { title: 'Secondary name', value: user.secondaryName },

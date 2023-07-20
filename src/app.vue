@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import moment from 'moment';
-import { IUser } from '@/types/user';
 import TsparticlesTools from '@/classes/tsparticles_tools';
+import { IRepo } from '@/types/repos';
 
-const user = (await useFetch('/api/user')).data.value as IUser;
-
+const user = await getUser();
+useState('user', () => user);
+useState<IRepo[]>('repos', () => []);
+useState('reposPage', () => 1);
 const isPartyMode = useState<boolean>('isPartyMode', () => {
   return moment().isSame(moment(user.birthday), 'day');
-});
+}).value;
 
 useHead({
   htmlAttrs: {
@@ -24,7 +26,7 @@ useHead({
 });
 
 onMounted(() => {
-  if (isPartyMode.value) {
+  if (isPartyMode) {
     TsparticlesTools.emit.confettiCanon({ options: { position: { x: 0, y: 100 }, angle: 45 } });
     TsparticlesTools.emit.confettiCanon({ options: { position: { x: 100, y: 100 }, angle: 135 } });
     document.addEventListener('pointerup', (e) => {
