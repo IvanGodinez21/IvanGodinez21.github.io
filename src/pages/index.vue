@@ -25,12 +25,12 @@ const aboutCells = [
         >
           <NuxtImg
             :src="user.social.github.avatar_url"
-            :alt="user.social.github.username || `${user.social.github.username} avatar` || 'avatar'"
-            class="h-auto w-fit mx-auto rounded-full"
+            :alt="user.social.github.username ?? (`${user.social.github.username} avatar` || 'avatar')"
+            class="h-auto lg:w-[70vw] sm:w-[43vw] max-sm:w-[43vw] mx-auto rounded-full"
             :sizes="{
-              sm: '46vw',
-              md: '46vw',
               lg: '70vw',
+              md: '43vw',
+              sm: '43vw',
             }"
             :width="0"
             :height="0"
