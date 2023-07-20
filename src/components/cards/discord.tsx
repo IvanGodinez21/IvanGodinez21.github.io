@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Activities, LanyardSocketEvents } from '@/constants/lanyard';
-import { ILanyardReponse } from '@/types/lanyard';
+import { ILanyardResponse } from '@/types/lanyard';
 import { IUser, IUserConstructor } from '@/types/user';
 import { useEffect, useState } from 'react';
 import Lanyard from '@/classes/lanyard';
@@ -17,7 +17,7 @@ export default function DiscordCard({ user }: { user: IUser }) {
       const lanyard = new Lanyard({
         userId: user.social.discord.id ?? user?.social?.discord?.discord_user?.id,
       });
-      function handler(data: ILanyardReponse) {
+      function handler(data: ILanyardResponse) {
         setDiscord(data);
       }
       lanyard.connect();
