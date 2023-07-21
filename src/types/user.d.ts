@@ -39,14 +39,6 @@ export interface IUserConstructor {
 
 export interface IUser extends IUserConstructor {
   age?: number;
-  birthday?: {
-    countDown: {
-      days: number;
-      hours: number;
-      minutes: number;
-      seconds: number;
-    };
-    date: Date;
-  };
+  birthday?: Date;
   fullName?: string;
 }
