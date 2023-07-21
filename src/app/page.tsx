@@ -10,8 +10,8 @@ export default async function IndexPage() {
   const aboutCells = [
     { title: 'First name', value: user.firstName },
     { title: 'Secondary name', value: user.secondaryName },
-    { title: 'Father\'s last name', value: user.fathersName },
-    { title: 'Mother\'s last name', value: user.mothersName },
+    { title: "Father's last name", value: user.fathersName },
+    { title: "Mother's last name", value: user.mothersName },
     { title: 'Gender', value: user.gender },
     { title: 'Birthdate', value: user.birthdate ? moment(user.birthdate).format('L') : undefined },
     { title: 'Age', value: user.age },
@@ -32,8 +32,8 @@ export default async function IndexPage() {
                 src={user.social.github.avatar_url}
                 alt={user.social.github.username ?? (`${user.social.github.username} avatar` || 'avatar')}
                 priority
-                className={'h-auto w-fit mx-auto rounded-full'}
-                sizes={'70vw'}
+                className={'h-auto lg:w-[70vw] sm:w-[43vw] max-sm:w-[43vw] mx-auto rounded-full'}
+                sizes={'70vw, 43vw, 43vw'}
                 width={0}
                 height={0}
               />
