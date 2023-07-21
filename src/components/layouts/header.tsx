@@ -1,33 +1,36 @@
 'use client';
 
-import Link from 'next/link';
-import MenuList from '../lists/menu';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import MenuButton from '../buttons/menu';
 import ThemeButton from '../buttons/theme';
-import { IUser } from '@/types/user';
-import { useState } from 'react';
 import { routes } from '@/constants/routes';
+import MenuList from '../lists/menu';
+import { IUser } from '@/types/user';
 
 export default function Header({ user }: { user: IUser }) {
   const [navHidden, setNavHidden] = useState<boolean>(true);
-
+  const router = useRouter();
   return (
     <div className={'p-2 shadow bg-emerald text-gunmetal'}>
       <div className={'flex flex-wrap justify-between mx-2'}>
         <div className={'flex max-lg:order-1 max-sm:order-2'}>
-          <Link
+          <button
             aria-label={'Redirect to start page'}
             title={'Start page'}
             className={'flex items-center btn-navbar-icon'}
-            href={'/'}
-            onClick={() => setNavHidden(true)}
+            onClick={() => {
+              router.push('/');
+              setNavHidden(true);
+            }}
+            type={'button'}
           >
             {(user.username ?? user.fullName) && (
               <span className={'self-center text-xl font-semibold whitespace-nowrap'}>
                 {user.username ? `@${user.username}` : user.fullName}
               </span>
             )}
-          </Link>
+          </button>
         </div>
         <div className={'flex md:hidden max-md:order-3'}>
           <MenuButton id={'header-nav'} state={[navHidden, setNavHidden]} />
