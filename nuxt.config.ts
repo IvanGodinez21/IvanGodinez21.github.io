@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         display: 'auto',
         download: true,
         families: {
-          Poppins: [500],
+          Poppins: [400],
         },
         subsets: ['latin'],
       },
