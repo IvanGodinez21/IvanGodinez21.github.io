@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  /* *:root,
+  *:root,
   html {
     @apply bg-tea-green dark:bg-gunmetal;
-  } */
+    font-family: var(--font-poppins);
+  }
 
   body {
     @apply bg-tea-green dark:bg-gunmetal text-gunmetal dark:text-tea-green;

@@ -6,7 +6,12 @@ import { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import '@/styles/globals.css';
 
-const font = Poppins({ weight: ['500'], subsets: ['latin'] });
+const font = Poppins({
+  display: 'auto',
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['400'],
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const user = await getUser();
@@ -18,8 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={'en'}>
-      <body className={font.className}>
+    <html lang={'en'} className={`${font.variable}`}>
+      <body>
         <CustomThemeProvider>
           <DefaultLayout>{children}</DefaultLayout>
         </CustomThemeProvider>
