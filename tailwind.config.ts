@@ -5,6 +5,9 @@ const tailwindcssConfig: Config = {
   darkMode: ['class'],
   theme: {
     extend: {
+      animation: {
+        heartbeat: 'heartbeat 2s infinite',
+      },
       colors: {
         gunmetal: '#0E2534',
         'prussian-blue': '#133246',
@@ -16,6 +19,16 @@ const tailwindcssConfig: Config = {
         'medium-spring-green': '#58E896',
         'granny-smith-apple': '#A0F5B6',
         'tea-green': '#C7F9CC',
+      },
+      keyframes: {
+        heartbeat: {
+          '0%, 80%': {
+            transform: 'scale(1)',
+          },
+          '90%': {
+            transform: 'scale(1.20)',
+          },
+        },
       },
     },
   },

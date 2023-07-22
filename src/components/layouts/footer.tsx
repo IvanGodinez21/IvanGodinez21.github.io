@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import HeartSpan from '../spans/heart';
 import { IContactMethod } from '@/types/contact';
 import { IUser } from '@/types/user';
 
@@ -20,7 +21,7 @@ export default function Footer({ user }: { user: IUser }) {
     <div className={'bg-emerald text-gunmetal md:flex md:items-center md:justify-between p-2'}>
       <div className={'flex max-md:justify-center max-md:text-center'}>
         <span className={'text-sm font-medium sm:text-center'}>
-          {`Made with ❤️${user.fullName ? ` by ${user.fullName}.` : ''}`}
+          Made with <HeartSpan /> {`${user.fullName ? ` by ${user.fullName}.` : ''}`}
         </span>
       </div>
       <div className={'flex max-md:justify-center'}>
