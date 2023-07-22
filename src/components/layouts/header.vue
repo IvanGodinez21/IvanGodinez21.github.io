@@ -6,7 +6,7 @@ const props = defineProps<{
   user: IUser;
 }>();
 
-const navHidden = useState<boolean>('navHidden', () => true);
+const navHidden = ref(true);
 </script>
 <template>
   <div class="p-2 shadow bg-emerald text-gunmetal">
@@ -33,14 +33,14 @@ const navHidden = useState<boolean>('navHidden', () => true);
         </button>
       </div>
       <div class="flex md:hidden max-md:order-3">
-        <ButtonsMenu id="header-nav" />
+        <ButtonsMenu id="header-nav" v-model:navHidden="navHidden" />
       </div>
       <div
         :class="`lg:order-2 md:order-4 max-md:order-4 max-sm:order-4 max-md:mt-2 justify-between items-center align-middle w-full md:flex lg:flex md:w-auto lg:w-auto ${
           navHidden ? 'hidden' : ''
         }`"
       >
-        <ListsMenu id="header-nav" :routes="routes" />
+        <ListsMenu id="header-nav" v-model:navHidden="navHidden" :routes="routes" />
       </div>
       <div class="flex lg:order-3 md:order-4 max-sm:order-1">
         <ButtonsTheme />

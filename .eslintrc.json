@@ -29,6 +29,8 @@
     "import/no-named-as-default-member": "off",
     "space-before-function-paren": "off",
     "vue/multi-word-component-names": "off",
+    "vue/attribute-hyphenation": ["error", "never"],
+    "vue/v-on-event-hyphenation": ["error", "never"],
     "indent": [
       "warn",
       2,

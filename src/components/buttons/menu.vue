@@ -4,9 +4,10 @@ import { HTMLAttributes } from 'vue';
 
 const props = defineProps<{
   id: HTMLAttributes['aria-controls'];
+  navHidden: boolean;
 }>();
 
-const navHidden = useState('navHidden');
+defineEmits(['update:navHidden']);
 </script>
 <template>
   <button
@@ -16,10 +17,10 @@ const navHidden = useState('navHidden');
     class="btn-navbar-icon"
     title="Toggle main menu"
     type="button"
-    @click="() => (navHidden = !navHidden)"
+    @click="() => $emit('update:navHidden', !navHidden)"
     @blur="
       (e) => {
-        if (!e.relatedTarget) navHidden = true;
+        if (!e.relatedTarget) $emit('update:navHidden', true);
       }
     "
   >

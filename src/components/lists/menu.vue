@@ -4,10 +4,11 @@ import Route from '@/classes/route';
 
 const props = defineProps<{
   id: HTMLAttributes['id'];
+  navHidden: boolean;
   routes: Route[];
 }>();
 
-const navHidden = useState('navHidden');
+defineEmits(['update:navHidden']);
 </script>
 <template>
   <nav :id="props.id">
@@ -24,7 +25,7 @@ const navHidden = useState('navHidden');
           @click="
             () => {
               $router.push({ path: route.path });
-              navHidden = true;
+              $emit('update:navHidden', true);
             }
           "
         >
