@@ -33,7 +33,7 @@ const contactMethods: IContactMethod[] = [
   <div class="bg-emerald text-gunmetal md:flex md:items-center md:justify-between p-2">
     <div class="flex max-md:justify-center max-md:text-center">
       <span class="text-sm font-medium sm:text-center">
-        Made with ❤️{{ props.user.fullName ? ` by ${props.user.fullName}.` : '' }}
+        Made with <SpansHeart /> {{ `${user.fullName ? ` by ${user.fullName}.` : ''}` }}
       </span>
     </div>
     <div class="flex max-md:justify-center">
