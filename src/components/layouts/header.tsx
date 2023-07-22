@@ -19,11 +19,11 @@ export default function Header({ user }: { user: IUser }) {
             aria-label={'Redirect to start page'}
             title={'Start page'}
             className={'flex items-center btn-navbar-icon'}
+            type={'button'}
             onClick={() => {
               router.push('/');
               setNavHidden(true);
             }}
-            type={'button'}
           >
             {(user.username ?? user.fullName) && (
               <span className={'self-center text-xl font-semibold whitespace-nowrap'}>

@@ -12,13 +12,12 @@ export default function MenuButton({
 
   return (
     <button
+      aria-controls={id}
       aria-label={'Toggle main menu button'}
+      aria-expanded={!navHidden}
       className={'btn-navbar-icon'}
       title={'Toggle main menu'}
       type={'button'}
-      data-collapse-toggle={id}
-      aria-controls={id}
-      aria-expanded={!navHidden}
       onClick={() => setNavHidden(!navHidden)}
       onBlur={(e) => {
         if (!e.relatedTarget) setNavHidden(true);

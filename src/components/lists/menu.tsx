@@ -27,11 +27,11 @@ export default function MenuList({
               className={`btn-navbar-category text-left w-full ${
                 pathname === route.path ? 'bg-cadet-blue dark:bg-keppel' : ''
               }`}
+              type={'button'}
               onClick={() => {
                 router.push(route.path);
                 setNavHidden(true);
               }}
-              type={'button'}
             >
               {route.name[0].toUpperCase() + route.name.slice(1)}
             </button>
