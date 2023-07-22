@@ -20,9 +20,10 @@ const navHidden = useState('navHidden');
             'btn-navbar-category text-left w-full',
             { 'bg-cadet-blue dark:bg-keppel': $route.path === route.path },
           ]"
+          type="button"
           @click="
             () => {
-              useRouter().push({ path: route.path });
+              $router.push({ path: route.path });
               navHidden = true;
             }
           "

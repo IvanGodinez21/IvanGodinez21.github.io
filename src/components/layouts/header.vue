@@ -16,7 +16,13 @@ const navHidden = useState<boolean>('navHidden', () => true);
           aria-label="Redirect to start page"
           title="Start page"
           class="flex items-center btn-navbar-icon"
-          @click="() => useRouter().push({ path: '/' })"
+          type="button"
+          @click="
+            () => {
+              $router.push({ path: '/' });
+              navHidden = true;
+            }
+          "
         >
           <span
             v-if="props.user.username ?? props.user.fullName"
