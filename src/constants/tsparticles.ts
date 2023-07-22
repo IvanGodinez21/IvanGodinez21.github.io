@@ -1,6 +1,6 @@
 import { ConfettiOptions } from 'tsparticles-confetti';
 
-const cofetti: ConfettiOptions = {
+const confetti: ConfettiOptions = {
   shapes: ['circle', 'square', 'text', 'triangle'],
   shapeOptions: {
     text: {
@@ -9,6 +9,23 @@ const cofetti: ConfettiOptions = {
   },
 };
 
-export const options = {
-  cofetti,
+const hearts: ConfettiOptions = {
+  colors: ['#00DC82', '#FFFFFF'],
+  shapes: ['heart', 'image', 'text'],
+  scalar: 1.5,
+  shapeOptions: {
+    image: [
+      {
+        src: '/icons/nuxt.svg',
+      },
+    ],
+    text: {
+      value: ['💚', '🤍'],
+    },
+  },
+};
+
+export const presets = {
+  confetti,
+  hearts,
 };
