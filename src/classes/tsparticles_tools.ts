@@ -1,31 +1,43 @@
 import { ConfettiOptions, confetti } from 'tsparticles-confetti';
-import { options } from '@/constants/tsparticles';
+import { presets } from '@/constants/tsparticles';
 
 export default class TsparticlesTools {
-  static emit = {
-    confettiCanon({
-      eventTarget,
-      options: customOptions,
-    }: {
-      eventTarget?: EventTarget | null | undefined;
-      options?: ConfettiOptions;
-    }) {
-      if (eventTarget instanceof Element) {
-        let position: ConfettiOptions['position'];
-        if (!customOptions?.position) {
-          const { height, left, top, width } = eventTarget.getBoundingClientRect();
-          const { innerHeight, innerWidth } = window;
-          position = {
-            x: ((left + width / 2) / innerWidth) * 100,
-            y: ((top + height / 2) / innerHeight) * 100,
-          };
-        } else {
-          position = customOptions.position;
-        }
-        confetti({ ...options.cofetti, ...customOptions, position });
+  static effect({
+    eventTarget,
+    options,
+    preset,
+  }: {
+    eventTarget?: EventTarget | null | undefined;
+    options?: ConfettiOptions;
+    preset?: ConfettiOptions;
+  }) {
+    if (eventTarget instanceof Element) {
+      let position: ConfettiOptions['position'];
+      if (!options?.position) {
+        const { height, left, top, width } = eventTarget.getBoundingClientRect();
+        const { innerHeight, innerWidth } = window;
+        position = {
+          x: ((left + width / 2) / innerWidth) * 100,
+          y: ((top + height / 2) / innerHeight) * 100,
+        };
       } else {
-        confetti({ ...options.cofetti, ...customOptions });
+        position = options.position;
       }
-    },
+      confetti({ ...preset, ...options, position });
+    } else {
+      confetti({ ...preset, ...options });
+    }
+  }
+
+  static emit = ({
+    eventTarget,
+    options,
+    preset = 'confetti',
+  }: {
+    eventTarget?: EventTarget | null | undefined;
+    options?: ConfettiOptions;
+    preset?: keyof typeof presets;
+  }) => {
+    this.effect({ eventTarget, options, preset: presets[preset] });
   };
 }
