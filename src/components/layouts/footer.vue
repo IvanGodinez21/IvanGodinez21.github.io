@@ -3,29 +3,29 @@ import { IContactMethod } from '@/types/contact';
 import { IUser } from '@/types/user';
 
 const props = defineProps<{
-  user: IUser;
+  user?: IUser;
 }>();
 
 const contactMethods: IContactMethod[] = [
   {
     icon: '/icons/facebook.svg',
     name: 'Facebook',
-    url: `https://facebook.com/${props.user.social.facebook.username}`,
+    url: `https://facebook.com/${props.user?.social.facebook.username}`,
   },
   {
     icon: '/icons/github.svg',
     name: 'GitHub',
-    url: props.user.social.github.html_url ?? `https://github.com/${props.user.social.github.username}`,
+    url: props.user?.social.github.html_url ?? `https://github.com/${props.user?.social.github.username}`,
   },
   {
     icon: '/icons/linkedin.svg',
     name: 'LinkedIn',
-    url: `https://linkedin.com/in/${props.user.social.linkedin.username}`,
+    url: `https://linkedin.com/in/${props.user?.social.linkedin.username}`,
   },
   {
     icon: '/icons/twitter.svg',
     name: 'Twitter',
-    url: `https://twitter.com/${props.user.social.twitter.username}`,
+    url: `https://twitter.com/${props.user?.social.twitter.username}`,
   },
 ];
 </script>
@@ -33,7 +33,7 @@ const contactMethods: IContactMethod[] = [
   <div class="bg-emerald text-gunmetal md:flex md:items-center md:justify-between p-2">
     <div class="flex max-md:justify-center max-md:text-center">
       <span class="text-sm font-medium sm:text-center">
-        Made with <SpansHeart /> {{ `${user.fullName ? ` by ${user.fullName}.` : ''}` }}
+        Made with <SpansHeart /> {{ `${user?.fullName ? ` by ${user?.fullName}.` : ''}` }}
       </span>
     </div>
     <div class="flex max-md:justify-center">

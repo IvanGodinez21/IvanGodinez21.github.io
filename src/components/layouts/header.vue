@@ -3,7 +3,7 @@ import { routes } from '@/constants/routes';
 import { IUser } from '@/types/user';
 
 const props = defineProps<{
-  user: IUser;
+  user?: IUser;
 }>();
 
 const navHidden = ref(true);
@@ -25,10 +25,10 @@ const navHidden = ref(true);
           "
         >
           <span
-            v-if="props.user.username ?? props.user.fullName"
+            v-if="props.user?.username ?? props.user?.fullName"
             class="self-center text-xl font-semibold whitespace-nowrap"
           >
-            {{ props.user.username ? `@${props.user.username}` : props.user.fullName }}
+            {{ props.user?.username ? `@${props.user?.username}` : props.user?.fullName }}
           </span>
         </button>
       </div>

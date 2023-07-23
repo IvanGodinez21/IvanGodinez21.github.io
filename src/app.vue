@@ -1,32 +1,30 @@
 <script lang="ts" setup>
 import moment from 'moment';
 import TsparticlesTools from '@/classes/tsparticles_tools';
-import { IRepo } from '@/types/repos';
+import { useStateStore } from '@/store/state';
 
-const user = await getUser();
-useState('user', () => user);
-useState<IRepo[]>('repos', () => []);
-useState('reposPage', () => 1);
-const isPartyMode = useState<boolean>('isPartyMode', () => {
-  return moment().isSame(moment(user.birthday), 'day');
-}).value;
+const store = useStateStore();
+const state = store.state;
+
+store.setUser({ value: await getUser() });
+store.setPartyMode({ value: moment().isSame(moment(state.user?.birthday), 'day') });
 
 useHead({
   htmlAttrs: {
     lang: 'en',
   },
-  title: `${user.username}'s website`,
+  title: `${state.user?.username}'s website`,
   link: [
     {
       rel: 'icon',
       type: 'image/x-icon',
-      href: user.social.github.avatar_url,
+      href: state.user?.social.github.avatar_url,
     },
   ],
 });
 
 onMounted(() => {
-  if (isPartyMode) {
+  if (state.isPartyMode) {
     TsparticlesTools.emit({ options: { position: { x: 0, y: 100 }, angle: 45 } });
     TsparticlesTools.emit({ options: { position: { x: 100, y: 100 }, angle: 135 } });
     document.addEventListener('pointerup', (e) => {
@@ -40,7 +38,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <NuxtLayout name="default" :user="user">
+  <NuxtLayout name="default" :user="state.user">
     <NuxtPage />
   </NuxtLayout>
 </template>

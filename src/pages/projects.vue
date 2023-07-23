@@ -2,9 +2,10 @@
 import { ArrowTrendingUpIcon, EyeIcon, StarIcon } from '@heroicons/vue/24/solid';
 import { content } from '@/contexts/scroll_ref';
 import { IRepo } from '@/types/repos';
+import { useStateStore } from '@/store/state';
 
-const repos = useState<IRepo[]>('repos');
-const reposPage = useState<number>('reposPage');
+const store = useStateStore();
+const state = store.state;
 
 function getStatusText({ isArchived, isPrivate }: { isArchived: IRepo['archived']; isPrivate: IRepo['private'] }) {
   if (!isArchived) return isPrivate ? 'Private' : 'Public';
@@ -16,23 +17,23 @@ function getStatusClass({ isArchived, isPrivate }: { isArchived: IRepo['archived
   return isArchived && !isPrivate ? 'bg-yellow-500' : 'bg-orange-500';
 }
 
-async function getReposPage() {
-  const newRepos = await getRepos({ page: reposPage.value });
-  repos.value = [...repos.value, ...newRepos];
+async function getReposByPage() {
+  const newRepos = await getRepos({ page: state.reposPage });
+  store.setRepos({ value: [...state.repos, ...newRepos] });
 }
 
 async function handleScroll() {
   if (content?.value) {
     const scrollPosition = content.value.scrollHeight - content.value.clientHeight;
     if (Math.ceil(content.value.scrollTop) >= scrollPosition) {
-      reposPage.value++;
-      await getReposPage();
+      store.setReposPage({ value: state.reposPage + 1 });
+      await getReposByPage();
     }
   }
 }
 
 onMounted(async () => {
-  if (!repos.value.length) await getReposPage();
+  if (!state.repos.length) await getReposByPage();
   if (content?.value) {
     content.value.addEventListener('scroll', handleScroll);
   }
@@ -47,7 +48,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="h-fit w-fit m-2">
     <NuxtLink
-      v-for="(repo, i) in repos"
+      v-for="(repo, i) in state.repos"
       :key="repo.id"
       :href="repo.html_url"
       target="_blank"
@@ -56,7 +57,7 @@ onBeforeUnmount(() => {
     >
       <div
         :class="`bg-medium-spring-green dark:bg-prussian-blue shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow ${
-          i !== repos.length - 1 ? 'mb-2' : ''
+          i !== state.repos.length - 1 ? 'mb-2' : ''
         } ${i !== 0 ? 'mt-2' : ''}`"
       >
         <div class="flex gap-2 items-center mb-2">

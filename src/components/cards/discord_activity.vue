@@ -5,7 +5,7 @@ import { ILanyardResponse } from '@/types/lanyard';
 import { IUser } from '@/types/user';
 
 const props = defineProps<{
-  user: IUser;
+  user?: IUser;
 }>();
 
 const discord = ref<IUser['social']['discord']>();
@@ -16,7 +16,7 @@ const mainActivity = computed(() =>
 
 onMounted(() => {
   function loadUser() {
-    if (!props.user.social.discord.id ?? !props.user.social.discord.discord_user?.id) return;
+    if (!props.user?.social.discord.id ?? !props.user?.social.discord.discord_user?.id) return;
     const lanyard = new Lanyard({
       userId: props.user.social.discord.id ?? props.user.social.discord.discord_user?.id,
     });

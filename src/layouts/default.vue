@@ -2,7 +2,7 @@
 import { IUser } from '@/types/user';
 
 const props = defineProps<{
-  user: IUser;
+  user?: IUser;
 }>();
 </script>
 <template>

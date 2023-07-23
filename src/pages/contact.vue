@@ -1,39 +1,41 @@
 <script lang="ts" setup>
 import { ArrowTopRightOnSquareIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/solid';
 import { IContactMethod } from '@/types/contact';
-import { IUser } from '@/types/user';
+import { useStateStore } from '@/store/state';
 
-const user = useState<IUser>('user').value;
+const store = useStateStore();
+const state = store.state;
+
 const contactMethods: IContactMethod[] = [
   {
     icon: '/icons/discord.svg',
     name: 'Discord',
-    url: `https://discord.com/channels/${user?.social.discord.username}`,
+    url: `https://discord.com/channels/${state.user?.social.discord.username}`,
   },
-  { icon: EnvelopeIcon, name: 'Email', url: `mailto:${user?.email ?? user?.social.github.email}` },
+  { icon: EnvelopeIcon, name: 'Email', url: `mailto:${state.user?.email ?? state.user?.social.github.email}` },
   {
     icon: '/icons/facebook.svg',
     name: 'Facebook',
-    url: `https://facebook.com/${user?.social.facebook.username}`,
+    url: `https://facebook.com/${state.user?.social.facebook.username}`,
   },
   {
     icon: '/icons/github.svg',
     name: 'GitHub',
-    url: user?.social.github.html_url ?? `https://github.com/${user?.social.github.username}`,
+    url: state.user?.social.github.html_url ?? `https://github.com/${state.user?.social.github.username}`,
   },
   {
     icon: '/icons/linkedin.svg',
     name: 'LinkedIn',
-    url: `https://linkedin.com/in/${user?.social.linkedin.username}`,
+    url: `https://linkedin.com/in/${state.user?.social.linkedin.username}`,
   },
-  { icon: '/icons/telegram.svg', name: 'Telegram', url: `https://t.me/${user?.social.telegram.username}` },
-  { icon: PhoneIcon, name: 'Thelephone', url: `tel:${user?.telephone}` },
+  { icon: '/icons/telegram.svg', name: 'Telegram', url: `https://t.me/${state.user?.social.telegram.username}` },
+  { icon: PhoneIcon, name: 'Thelephone', url: `tel:${state.user?.telephone}` },
   {
     icon: '/icons/twitter.svg',
     name: 'Twitter',
-    url: `https://twitter.com/${user?.social.twitter.username}`,
+    url: `https://twitter.com/${state.user?.social.twitter.username}`,
   },
-  { icon: '/icons/whatsapp.svg', name: 'WhatsApp', url: `https://wa.me/${user?.social.whatsapp.telephone}` },
+  { icon: '/icons/whatsapp.svg', name: 'WhatsApp', url: `https://wa.me/${state.user?.social.whatsapp.telephone}` },
 ];
 </script>
 <template>
