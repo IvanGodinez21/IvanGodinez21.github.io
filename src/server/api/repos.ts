@@ -1,5 +1,6 @@
 import { H3Event } from 'h3';
 import { octokit } from '@/clients/octokit';
+import { IRepo } from '@/types/repos';
 
 export default defineEventHandler(async (event) => {
   switch (event.node.req.method) {
@@ -13,12 +14,12 @@ export default defineEventHandler(async (event) => {
   }
 });
 
-async function GET({ event }: { event: H3Event }) {
+async function GET({ event }: { event: H3Event }): Promise<IRepo[]> {
   const body = await getQuery(event);
   return await fetchRepos(body as unknown as Parameters<typeof fetchRepos>[0]);
 }
 
-async function fetchRepos({ page }: { page: number }) {
+async function fetchRepos({ page }: { page: number }): Promise<IRepo[]> {
   return (
     await octokit.rest.repos.listForAuthenticatedUser({
       visibility: 'all',
@@ -26,5 +27,5 @@ async function fetchRepos({ page }: { page: number }) {
       sort: 'pushed',
       page,
     })
-  ).data;
+  ).data satisfies IRepo[];
 }

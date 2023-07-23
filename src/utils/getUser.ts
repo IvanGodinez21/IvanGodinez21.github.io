@@ -1,5 +1,7 @@
-export async function getUser() {
-  return await $fetch('/api/user', {
+import { IUser } from '@/types/user';
+
+export async function getUser(): Promise<IUser> {
+  return await $fetch<IUser>('/api/user', {
     method: 'GET',
   });
 }

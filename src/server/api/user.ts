@@ -2,6 +2,7 @@ import moment from 'moment';
 import Lanyard from '@/classes/lanyard';
 import User from '@/classes/user';
 import { octokit } from '@/clients/octokit';
+import { IUser } from '@/types/user';
 
 export default defineEventHandler(async (event) => {
   switch (event.node.req.method) {
@@ -15,11 +16,11 @@ export default defineEventHandler(async (event) => {
   }
 });
 
-async function GET() {
+async function GET(): Promise<IUser> {
   return await fetchUser();
 }
 
-async function fetchUser() {
+async function fetchUser(): Promise<IUser> {
   const discord = process.env.DISCORD_ID ? await Lanyard.fetch({ userId: process.env.DISCORD_ID }) : undefined;
   const github = (await octokit.rest.users.getAuthenticated()).data;
   return new User({

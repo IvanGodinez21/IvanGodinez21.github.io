@@ -1,5 +1,7 @@
-export async function getRepos(query: { page: number }) {
-  return await $fetch('/api/repos', {
+import { IRepo } from '@/types/repos';
+
+export async function getRepos(query: { page: number }): Promise<IRepo[]> {
+  return await $fetch<IRepo[]>('/api/repos', {
     method: 'GET',
     query,
   });
