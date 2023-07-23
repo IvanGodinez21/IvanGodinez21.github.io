@@ -49,6 +49,7 @@ export default defineNuxtConfig({
         viewer: true,
       },
     ],
+    ['@pinia/nuxt', {}],
   ],
   plugins: [{ src: '@/plugins/vercel.ts', mode: 'client' }],
 });
