@@ -8,7 +8,7 @@ import { routes } from '@/constants/routes';
 import MenuList from '../lists/menu';
 import { IUser } from '@/types/user';
 
-export default function Header({ user }: { user: IUser }) {
+export default function Header({ user }: { user?: IUser }) {
   const [navHidden, setNavHidden] = useState<boolean>(true);
   const router = useRouter();
   return (
@@ -25,7 +25,7 @@ export default function Header({ user }: { user: IUser }) {
               setNavHidden(true);
             }}
           >
-            {(user.username ?? user.fullName) && (
+            {(user?.username ?? user?.fullName) && (
               <span className={'self-center text-xl font-semibold whitespace-nowrap'}>
                 {user.username ? `@${user.username}` : user.fullName}
               </span>

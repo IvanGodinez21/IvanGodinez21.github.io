@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
@@ -6,6 +7,8 @@ import Providers from '@/providers/providers';
 import '@/styles/globals.css';
 import { getUser } from '@/utils/getUser';
 import Preloader from '@/store/preloader';
+import { store } from '@/store/index';
+import { actions } from '@/store/state';
 
 const font = Poppins({
   display: 'auto',
@@ -15,6 +18,9 @@ const font = Poppins({
 });
 
 const user = await (async () => await getUser())();
+
+store.dispatch(actions.setUser(user));
+store.dispatch(actions.setPartyMode(moment().isSame(moment(user.birthday), 'day')));
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
