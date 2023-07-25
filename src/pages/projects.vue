@@ -7,6 +7,8 @@ import { useStateStore } from '@/store/state';
 const store = useStateStore();
 const state = store.state;
 
+const isLoading = ref(false);
+
 function getStatusText({ isArchived, isPrivate }: { isArchived: IRepo['archived']; isPrivate: IRepo['private'] }) {
   if (!isArchived) return isPrivate ? 'Private' : 'Public';
   return isArchived && !isPrivate ? 'Public Archive' : 'Private Archive';
@@ -18,25 +20,32 @@ function getStatusClass({ isArchived, isPrivate }: { isArchived: IRepo['archived
 }
 
 async function getReposByPage() {
+  isLoading.value = true;
   const newRepos = await getRepos({ page: state.reposPage });
-  store.setRepos({ value: [...state.repos, ...newRepos] });
+  if (newRepos.length) {
+    const uniqueRepos = newRepos.filter((repo) => !state.repos.map((prevRepo) => prevRepo.id).includes(repo.id));
+    store.setRepos({ value: [...state.repos, ...uniqueRepos] });
+    store.setReposPage({ value: state.reposPage + 1 });
+  }
+  isLoading.value = false;
 }
 
 async function handleScroll() {
   if (content?.value) {
     const scrollPosition = content.value.scrollHeight - content.value.clientHeight;
     if (Math.ceil(content.value.scrollTop) >= scrollPosition) {
-      store.setReposPage({ value: state.reposPage + 1 });
       await getReposByPage();
     }
   }
 }
 
-onMounted(async () => {
-  if (!state.repos.length) await getReposByPage();
-  if (content?.value) {
-    content.value.addEventListener('scroll', handleScroll);
-  }
+onMounted(() => {
+  (async () => {
+    if (!state.repos.length) await getReposByPage();
+    if (content?.value) {
+      content.value.addEventListener('scroll', handleScroll);
+    }
+  })();
 });
 
 onBeforeUnmount(() => {

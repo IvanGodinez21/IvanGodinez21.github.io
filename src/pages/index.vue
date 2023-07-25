@@ -94,7 +94,7 @@ const aboutCells = [
               </div>
               <ul class="list-inside list-disc grid grid-cols-2 gap-2 m-2">
                 <li
-                  v-for="(technology, index) in state.user?.technologies?.slice().sort((a, b) => (a > b ? 1 : -1))"
+                  v-for="(technology, index) in Array.from(state.user?.technologies)?.sort((a, b) => (a > b ? 1 : -1))"
                   :key="index"
                 >
                   {{ technology }}
@@ -111,7 +111,7 @@ const aboutCells = [
               </div>
               <ul class="list-inside list-disc grid gap-2 m-2">
                 <li
-                  v-for="(school, index) in state.user?.education?.slice().sort((a, b) => (a > b ? 1 : -1))"
+                  v-for="(school, index) in Array.from(state.user?.education)?.sort((a, b) => (a > b ? 1 : -1))"
                   :key="index"
                 >
                   {{ school }}
