@@ -29,7 +29,7 @@ export default async function ContactPage() {
       url: `https://linkedin.com/in/${state.user?.social.linkedin.username}`,
     },
     { icon: '/icons/telegram.svg', name: 'Telegram', url: `https://t.me/${state.user?.social.telegram.username}` },
-    { icon: PhoneIcon, name: 'Thelephone', url: `tel:${state.user?.telephone}` },
+    { icon: PhoneIcon, name: 'Telephone', url: `tel:${state.user?.telephone}` },
     { icon: '/icons/twitter.svg', name: 'Twitter', url: `https://twitter.com/${state.user?.social.twitter.username}` },
     { icon: '/icons/whatsapp.svg', name: 'WhatsApp', url: `https://wa.me/${state.user?.social.whatsapp.telephone}` },
   ];
