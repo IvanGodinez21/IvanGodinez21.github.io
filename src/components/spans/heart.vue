@@ -3,7 +3,7 @@ import TsparticlesTools from '@/classes/tsparticles_tools';
 
 const isHover = ref(false);
 
-function emitHearts({ e }: { e: PointerEvent | MouseEvent }) {
+function emitHearts({ e }: { e: PointerEvent }) {
   TsparticlesTools.emit({ eventTarget: e.target, preset: 'hearts' });
   isHover.value = true;
 }
@@ -11,7 +11,7 @@ function emitHearts({ e }: { e: PointerEvent | MouseEvent }) {
 <template>
   <span
     class="animate-heartbeat inline-block"
-    @click="(e) => emitHearts({ e })"
+    @pointerup="(e) => emitHearts({ e })"
     @pointerover="(e) => emitHearts({ e })"
     @pointerout="
       () => {

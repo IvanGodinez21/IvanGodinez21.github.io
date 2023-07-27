@@ -22,7 +22,7 @@ defineEmits(['update:navHidden']);
             { 'bg-cadet-blue dark:bg-keppel': $route.path === route.path },
           ]"
           type="button"
-          @click="
+          @pointerup="
             () => {
               $router.push({ path: route.path });
               $emit('update:navHidden', true);

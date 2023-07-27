@@ -17,7 +17,7 @@ const navHidden = ref(true);
           title="Start page"
           class="flex items-center btn-navbar-icon"
           type="button"
-          @click="
+          @pointerup="
             () => {
               $router.push({ path: '/' });
               navHidden = true;

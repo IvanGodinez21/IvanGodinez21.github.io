@@ -2,7 +2,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/vue/24/solid';
 
 const showThemeIcon = ref(false);
-
 const themeIcon = computed(() => (useColorMode().value === 'dark' ? MoonIcon : SunIcon));
 
 onMounted(() => {
@@ -16,7 +15,11 @@ onMounted(() => {
     class="btn-navbar-icon"
     title="Toggle theme"
     type="button"
-    @click="() => ($colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark')"
+    @pointerup="
+      (e) => {
+        if (e.button !== 2) $colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark';
+      }
+    "
     @contextmenu="
       (e) => {
         e.preventDefault();

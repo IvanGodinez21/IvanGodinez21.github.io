@@ -17,7 +17,7 @@ defineEmits(['update:navHidden']);
     class="btn-navbar-icon"
     title="Toggle main menu"
     type="button"
-    @click="() => $emit('update:navHidden', !navHidden)"
+    @pointerup="() => $emit('update:navHidden', !navHidden)"
     @blur="
       (e) => {
         if (!e.relatedTarget) $emit('update:navHidden', true);
