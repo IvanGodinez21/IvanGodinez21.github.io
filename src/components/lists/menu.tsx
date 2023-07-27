@@ -28,7 +28,7 @@ export default function MenuList({
                 pathname === route.path ? 'bg-cadet-blue dark:bg-keppel' : ''
               }`}
               type={'button'}
-              onClick={() => {
+              onPointerUp={() => {
                 router.push(route.path);
                 setNavHidden(true);
               }}

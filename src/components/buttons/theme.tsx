@@ -20,8 +20,8 @@ export default function ThemeButton() {
         className={'btn-navbar-icon'}
         title={'Toggle theme'}
         type={'button'}
-        onClick={() => {
-          setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+        onPointerUp={(e) => {
+          if (e.button !== 2) setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
         }}
         onContextMenu={(e) => {
           e.preventDefault();

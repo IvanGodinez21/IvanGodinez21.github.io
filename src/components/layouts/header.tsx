@@ -20,7 +20,7 @@ export default function Header({ user }: { user?: IUser }) {
             title={'Start page'}
             className={'flex items-center btn-navbar-icon'}
             type={'button'}
-            onClick={() => {
+            onPointerUp={() => {
               router.push('/');
               setNavHidden(true);
             }}

@@ -18,7 +18,7 @@ export default function MenuButton({
       className={'btn-navbar-icon'}
       title={'Toggle main menu'}
       type={'button'}
-      onClick={() => setNavHidden(!navHidden)}
+      onPointerUp={() => setNavHidden(!navHidden)}
       onBlur={(e) => {
         if (!e.relatedTarget) setNavHidden(true);
       }}
