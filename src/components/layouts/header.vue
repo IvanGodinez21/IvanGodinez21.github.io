@@ -9,13 +9,13 @@ const props = defineProps<{
 const navHidden = ref(true);
 </script>
 <template>
-  <div class="p-2 shadow bg-emerald text-gunmetal">
-    <div class="flex flex-wrap justify-between mx-2">
+  <div class="bg-emerald p-2 text-gunmetal shadow">
+    <div class="mx-2 flex flex-wrap justify-between">
       <div class="flex max-lg:order-1 max-sm:order-2">
         <button
           aria-label="Redirect to start page"
           title="Start page"
-          class="flex items-center btn-navbar-icon"
+          class="btn-navbar-icon flex items-center"
           type="button"
           @pointerup="
             () => {
@@ -26,23 +26,31 @@ const navHidden = ref(true);
         >
           <span
             v-if="props.user?.username ?? props.user?.fullName"
-            class="self-center text-xl font-semibold whitespace-nowrap"
+            class="self-center whitespace-nowrap text-xl font-semibold"
           >
-            {{ props.user?.username ? `@${props.user?.username}` : props.user?.fullName }}
+            {{
+              props.user?.username
+                ? `@${props.user?.username}`
+                : props.user?.fullName
+            }}
           </span>
         </button>
       </div>
-      <div class="flex md:hidden max-md:order-3">
+      <div class="flex max-md:order-3 md:hidden">
         <ButtonsMenu id="header-nav" v-model:navHidden="navHidden" />
       </div>
       <div
-        :class="`lg:order-2 md:order-4 max-md:order-4 max-sm:order-4 max-md:mt-2 justify-between items-center align-middle w-full md:flex lg:flex md:w-auto lg:w-auto ${
+        :class="`w-full items-center justify-between align-middle max-md:order-4 max-md:mt-2 max-sm:order-4 md:order-4 md:flex md:w-auto lg:order-2 lg:flex lg:w-auto ${
           navHidden ? 'hidden' : ''
         }`"
       >
-        <ListsMenu id="header-nav" v-model:navHidden="navHidden" :routes="routes" />
+        <ListsMenu
+          id="header-nav"
+          v-model:navHidden="navHidden"
+          :routes="routes"
+        />
       </div>
-      <div class="flex lg:order-3 md:order-4 max-sm:order-1">
+      <div class="flex max-sm:order-1 md:order-4 lg:order-3">
         <ButtonsTheme />
       </div>
     </div>

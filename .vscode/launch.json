@@ -13,9 +13,7 @@
       "request": "launch",
       "name": "Debug Server [development]",
       "console": "integratedTerminal",
-      "args": [
-        "dev"
-      ],
+      "args": ["dev"],
       "env": {
         "NODE_OPTIONS": "--inspect"
       },
@@ -39,9 +37,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Server [production]",
-      "args": [
-        "start"
-      ],
+      "args": ["start"],
       "console": "integratedTerminal",
       "env": {
         "NODE_OPTIONS": "--inspect"
@@ -61,22 +57,16 @@
       "windows": {
         "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.mjs"
       }
-    },
+    }
   ],
   "compounds": [
     {
       "name": "Debug Fullstack [development]",
-      "configurations": [
-        "Debug Server [development]",
-        "Client"
-      ]
+      "configurations": ["Debug Server [development]", "Client"]
     },
     {
       "name": "Debug Fullstack [production]",
-      "configurations": [
-        "Debug Server [production]",
-        "Client"
-      ]
+      "configurations": ["Debug Server [production]", "Client"]
     }
   ]
 }

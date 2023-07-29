@@ -2,7 +2,9 @@
 import { MoonIcon, SunIcon } from '@heroicons/vue/24/solid';
 
 const showThemeIcon = ref(false);
-const themeIcon = computed(() => (useColorMode().value === 'dark' ? MoonIcon : SunIcon));
+const themeIcon = computed(() =>
+  useColorMode().value === 'dark' ? MoonIcon : SunIcon,
+);
 
 onMounted(() => {
   showThemeIcon.value = true;
@@ -17,7 +19,9 @@ onMounted(() => {
     type="button"
     @pointerup="
       (e) => {
-        if (e.button !== 2) $colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark';
+        if (e.button !== 2)
+          $colorMode.preference =
+            $colorMode.value === 'dark' ? 'light' : 'dark';
       }
     "
     @contextmenu="
@@ -27,6 +31,6 @@ onMounted(() => {
       }
     "
   >
-    <component :is="themeIcon" class="w-6 h-6" />
+    <component :is="themeIcon" class="h-6 w-6" />
   </button>
 </template>

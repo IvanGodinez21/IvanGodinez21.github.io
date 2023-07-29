@@ -24,6 +24,6 @@ defineEmits(['update:navHidden']);
       }
     "
   >
-    <Bars3Icon class="w-6 h-6" />
+    <Bars3Icon class="h-6 w-6" />
   </button>
 </template>

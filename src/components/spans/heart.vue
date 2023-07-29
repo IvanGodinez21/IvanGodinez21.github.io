@@ -10,7 +10,7 @@ function emitHearts({ e }: { e: PointerEvent }) {
 </script>
 <template>
   <span
-    class="animate-heartbeat inline-block"
+    class="inline-block animate-heartbeat"
     @pointerup="(e) => emitHearts({ e })"
     @pointerover="(e) => emitHearts({ e })"
     @pointerout="

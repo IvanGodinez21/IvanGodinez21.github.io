@@ -9,13 +9,18 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col w-full h-full space-y-2">
-    <div class="bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-1 items-center justify-center">
+  <div class="flex h-full w-full flex-col space-y-2">
+    <div
+      class="flex flex-1 items-center justify-center rounded-lg bg-granny-smith-apple dark:bg-indigo-dye"
+    >
       <FontsH1 class="font-bold first-letter:uppercase">
         {{ NuxtTools.pageName({ pathname: $route.path }) }}
       </FontsH1>
     </div>
-    <div ref="content" class="bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-[9_9_0%] overflow-y-auto">
+    <div
+      ref="content"
+      class="flex flex-[9_9_0%] overflow-y-auto rounded-lg bg-granny-smith-apple dark:bg-indigo-dye"
+    >
       <slot />
     </div>
   </div>

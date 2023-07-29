@@ -7,11 +7,11 @@ const props = defineProps<{
 </script>
 <template>
   <div>
-    <div class="flex flex-col h-screen w-screen">
+    <div class="flex h-screen w-screen flex-col">
       <header class="sticky w-full">
         <LayoutsHeader :user="props.user" />
       </header>
-      <main class="flex flex-col flex-1 m-4 overflow-y-hidden">
+      <main class="m-4 flex flex-1 flex-col overflow-y-hidden">
         <LayoutsMain>
           <slot />
         </LayoutsMain>

@@ -11,7 +11,9 @@ async function getReposByPage() {
   isLoading.value = true;
   const newRepos = await getRepos({ page: state.reposPage });
   if (newRepos.length) {
-    const uniqueRepos = newRepos.filter((repo) => !state.repos.map((prevRepo) => prevRepo.id).includes(repo.id));
+    const uniqueRepos = newRepos.filter(
+      (repo) => !state.repos.map((prevRepo) => prevRepo.id).includes(repo.id),
+    );
     store.setRepos({ value: [...state.repos, ...uniqueRepos] });
     store.setReposPage({ value: state.reposPage + 1 });
   }
@@ -20,7 +22,8 @@ async function getReposByPage() {
 
 async function handleScroll() {
   if (content?.value) {
-    const scrollPosition = content.value.scrollHeight - content.value.clientHeight;
+    const scrollPosition =
+      content.value.scrollHeight - content.value.clientHeight;
     if (Math.ceil(content.value.scrollTop) >= scrollPosition) {
       await getReposByPage();
     }
@@ -43,7 +46,7 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
-  <div class="h-fit w-fit grid m-2 gap-2">
+  <div class="m-2 grid h-fit w-fit gap-2">
     <NuxtLink
       v-for="repo in state.repos"
       :key="repo.id"

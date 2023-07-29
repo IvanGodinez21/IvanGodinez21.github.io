@@ -15,7 +15,9 @@ const contactMethods: IContactMethod[] = [
   {
     icon: '/icons/github.svg',
     name: 'GitHub',
-    url: props.user?.social.github.html_url ?? `https://github.com/${props.user?.social.github.username}`,
+    url:
+      props.user?.social.github.html_url ??
+      `https://github.com/${props.user?.social.github.username}`,
   },
   {
     icon: '/icons/linkedin.svg',
@@ -30,23 +32,33 @@ const contactMethods: IContactMethod[] = [
 ];
 </script>
 <template>
-  <div class="bg-emerald text-gunmetal md:flex md:items-center md:justify-between p-2">
+  <div
+    class="bg-emerald p-2 text-gunmetal md:flex md:items-center md:justify-between"
+  >
     <div class="flex max-md:justify-center max-md:text-center">
       <span class="text-sm font-medium sm:text-center">
-        Made with <SpansHeart /> {{ `${user?.fullName ? ` by ${user?.fullName}.` : ''}` }}
+        Made with <SpansHeart />
+        {{ `${user?.fullName ? ` by ${user?.fullName}.` : ''}` }}
       </span>
     </div>
     <div class="flex max-md:justify-center">
       <template
-        v-for="(contactMethod, index) in contactMethods.sort((a, b) => (a.name > b.name ? 1 : -1))"
+        v-for="(contactMethod, index) in contactMethods.sort((a, b) =>
+          a.name > b.name ? 1 : -1,
+        )"
         :key="index"
       >
-        <a :href="contactMethod.url" target="_blank" rel="noopener" class="btn-footer-icon">
+        <a
+          :href="contactMethod.url"
+          target="_blank"
+          rel="noopener"
+          class="btn-footer-icon"
+        >
           <NuxtImg
             v-if="typeof contactMethod.icon === 'string'"
             :src="contactMethod.icon"
             :alt="contactMethod.name"
-            class="w-5 h-5"
+            class="h-5 w-5"
             :width="0"
             :height="0"
           />

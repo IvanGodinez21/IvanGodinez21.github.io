@@ -17,7 +17,9 @@ export interface IUserConstructor {
     facebook: {
       username?: string;
     };
-    github: Awaited<ReturnType<Octokit['rest']['users']['getAuthenticated']>>['data'] & { username?: string };
+    github: Awaited<
+      ReturnType<Octokit['rest']['users']['getAuthenticated']>
+    >['data'] & { username?: string };
     linkedin: {
       username?: string;
     };

@@ -13,12 +13,12 @@ defineEmits(['update:navHidden']);
 <template>
   <nav :id="props.id">
     <ul
-      class="flex flex-col rounded-lg max-md:ring-2 max-md:bg-tea-green dark:max-md:bg-gunmetal md:flex-row md:space-x-4 md:text-sm md:font-medium ring-gunmetal dark:ring-tea-green max-md:text-gunmetal dark:max-md:text-tea-green"
+      class="flex flex-col rounded-lg ring-gunmetal dark:ring-tea-green max-md:bg-tea-green max-md:text-gunmetal max-md:ring-2 dark:max-md:bg-gunmetal dark:max-md:text-tea-green md:flex-row md:space-x-4 md:text-sm md:font-medium"
     >
       <li v-for="(route, index) in props.routes" :key="index">
         <button
           :class="[
-            'btn-navbar-category text-left w-full',
+            'btn-navbar-category w-full text-left',
             { 'bg-cadet-blue dark:bg-keppel': $route.path === route.path },
           ]"
           type="button"
