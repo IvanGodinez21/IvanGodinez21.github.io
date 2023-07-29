@@ -1,5 +1,9 @@
 export default class Tools {
-  public static toCamelCase({ object }: { object: { [key: string | number]: object } }): {
+  public static toCamelCase({
+    object,
+  }: {
+    object: { [key: string | number]: object };
+  }): {
     [key: string | number]: object;
   } {
     if (typeof object !== 'object' || Array.isArray(object)) {
@@ -15,12 +19,16 @@ export default class Tools {
         });
         if (typeof object[key] === 'object' && object[key] !== null) {
           if (Array.isArray(object[key])) {
-            const convertedArray = (object[key] as Array<{ [key: string]: object }>).map((item) => {
+            const convertedArray = (
+              object[key] as Array<{ [key: string]: object }>
+            ).map((item) => {
               return this.toCamelCase({ object: item });
             });
             result[camelCaseKey] = convertedArray;
           } else {
-            result[camelCaseKey] = this.toCamelCase({ object: object[key] as { [key: string]: object } });
+            result[camelCaseKey] = this.toCamelCase({
+              object: object[key] as { [key: string]: object },
+            });
           }
         } else {
           result[camelCaseKey] = object[key];

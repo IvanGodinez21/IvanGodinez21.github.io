@@ -1,5 +1,9 @@
 import { LanyardSocketEvents } from '@/constants/lanyard';
-import { ILanyard, ILanyardConstructor, ILanyardResponse } from '@/types/lanyard';
+import {
+  ILanyard,
+  ILanyardConstructor,
+  ILanyardResponse,
+} from '@/types/lanyard';
 
 export default class Lanyard {
   public apiUrl: ILanyard['apiUrl'];
@@ -33,7 +37,10 @@ export default class Lanyard {
     }
   }
 
-  public on(eventName: LanyardSocketEvents, handler: (user: ILanyardResponse) => void) {
+  public on(
+    eventName: LanyardSocketEvents,
+    handler: (user: ILanyardResponse) => void,
+  ) {
     if (!this.socketMode) throw new Error('Socket mode is disabled');
     if (!this.events[eventName]) {
       this.events[eventName] = [];
@@ -41,7 +48,10 @@ export default class Lanyard {
     this.events[eventName].push(handler);
   }
 
-  public off(eventName: LanyardSocketEvents, handler: (user: ILanyardResponse) => void) {
+  public off(
+    eventName: LanyardSocketEvents,
+    handler: (user: ILanyardResponse) => void,
+  ) {
     if (!this.socketMode) throw new Error('Socket mode is disabled');
     const handlers = this.events[eventName];
     if (handlers) {
@@ -52,9 +62,12 @@ export default class Lanyard {
     }
   }
 
-  private createWebSocket({ attempt = 0 }: { attempt?: number } | undefined = {}) {
+  private createWebSocket({
+    attempt = 0,
+  }: { attempt?: number } | undefined = {}) {
     this.socket = new WebSocket(this.webSocketUrl);
-    const subscription = typeof this.userId === 'string' ? 'subscribe_to_id' : 'subscribe_to_ids';
+    const subscription =
+      typeof this.userId === 'string' ? 'subscribe_to_id' : 'subscribe_to_ids';
 
     this.socket.addEventListener('open', () => {
       this.socket?.send(
@@ -63,14 +76,14 @@ export default class Lanyard {
           d: {
             [subscription]: this.userId,
           },
-        })
+        }),
       );
 
       const heartbeat = setInterval(() => {
         this.socket?.send(
           JSON.stringify({
             op: 3,
-          })
+          }),
         );
       }, this.heartBeatPeriod);
 
@@ -90,13 +103,23 @@ export default class Lanyard {
 
     this.socket.addEventListener('message', ({ data }) => {
       const { t, d } = JSON.parse(data.toString());
-      if (t === LanyardSocketEvents.initState || t === LanyardSocketEvents.presenceUpdate) this.emit(t, d);
+      if (
+        t === LanyardSocketEvents.initState ||
+        t === LanyardSocketEvents.presenceUpdate
+      )
+        this.emit(t, d);
     });
   }
 
   public async fetch(): Promise<ILanyardResponse | undefined> {
     if (typeof this.userId === 'string') {
-      return (await (await fetch(`${this.apiUrl}/users/${this.userId}`, { cache: 'no-cache' })).json()).data;
+      return (
+        await (
+          await fetch(`${this.apiUrl}/users/${this.userId}`, {
+            cache: 'no-cache',
+          })
+        ).json()
+      ).data;
     }
   }
 
@@ -108,7 +131,11 @@ export default class Lanyard {
     userId: ILanyardConstructor['userId'];
   }): Promise<ILanyardResponse | undefined> {
     if (typeof userId === 'string') {
-      return (await (await fetch(`${apiUrl}/users/${userId}`, { cache: 'no-cache' })).json()).data;
+      return (
+        await (
+          await fetch(`${apiUrl}/users/${userId}`, { cache: 'no-cache' })
+        ).json()
+      ).data;
     }
   }
 

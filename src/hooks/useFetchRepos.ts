@@ -16,18 +16,22 @@ export function useFetchRepos({ page }: { page: number }): {
       try {
         const response = await fetch(
           `/api/repos?${new URLSearchParams(
-            Object.entries({ page }).map(([key, value]) => [key, String(value)])
+            Object.entries({ page }).map(([key, value]) => [
+              key,
+              String(value),
+            ]),
           ).toString()}`,
           {
             method: 'GET',
-          }
+          },
         );
         if (response.ok) {
           const data = await response.json();
           setRepos((prevRepos) => {
             if (!prevRepos) return data;
             const uniqueRepos = data.filter(
-              (repo: IRepo) => !prevRepos.map((prevRepo) => prevRepo.id).includes(repo.id)
+              (repo: IRepo) =>
+                !prevRepos.map((prevRepo) => prevRepo.id).includes(repo.id),
             );
             return [...prevRepos, ...uniqueRepos];
           });

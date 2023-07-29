@@ -5,9 +5,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Server [development]",
-      "args": [
-        "dev"
-      ],
+      "args": ["dev"],
       "env": {
         "NODE_OPTIONS": "--inspect"
       },
@@ -31,9 +29,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Server [production]",
-      "args": [
-        "start"
-      ],
+      "args": ["start"],
       "env": {
         "NODE_OPTIONS": "--inspect"
       },
@@ -57,9 +53,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Fullstack [development]",
-      "args": [
-        "dev"
-      ],
+      "args": ["dev"],
       "env": {
         "NODE_OPTIONS": "--inspect"
       },
@@ -84,9 +78,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Fullstack [production]",
-      "args": [
-        "start"
-      ],
+      "args": ["start"],
       "env": {
         "NODE_OPTIONS": "--inspect"
       },

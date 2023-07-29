@@ -1,7 +1,8 @@
 import moment from 'moment';
 import { IUser, IUserConstructor } from '@/types/user';
 
-const override = process.env.USER_NAME_OVERRIDE?.toLowerCase() === 'true' ?? false;
+const override =
+  process.env.USER_NAME_OVERRIDE?.toLowerCase() === 'true' ?? false;
 
 export default class User implements IUser {
   public birthdate: IUser['birthdate'];
@@ -60,12 +61,18 @@ export default class User implements IUser {
     if (!this.birthdate) return undefined;
     const birthday = moment(this.birthdate).set('year', moment().year());
     const today = moment();
-    if (birthday.isBefore(today, 'day') && !birthday.isSame(today, 'day')) birthday.add(1, 'year');
+    if (birthday.isBefore(today, 'day') && !birthday.isSame(today, 'day'))
+      birthday.add(1, 'year');
     return birthday.toDate();
   }
 
   public get fullName(): IUser['fullName'] {
-    const names = [this.firstName, this.secondaryName, this.fathersName, this.mothersName];
+    const names = [
+      this.firstName,
+      this.secondaryName,
+      this.fathersName,
+      this.mothersName,
+    ];
     const name = names.filter((name) => name !== undefined).join(' ');
     return name.length > 0 ? name : undefined;
   }
@@ -75,39 +82,62 @@ export default class User implements IUser {
       discord: {
         ...this._social.discord,
         id: this._social.discord.id,
-        username: this._social.discord.username ?? (override ? this.username : undefined),
+        username:
+          this._social.discord.username ??
+          (override ? this.username : undefined),
       },
       facebook: {
-        username: this._social.facebook.username ?? (override ? this.username : undefined),
+        username:
+          this._social.facebook.username ??
+          (override ? this.username : undefined),
       },
       github: {
         ...this._social.github,
-        username: this._social.github.username ?? (override ? this.username : undefined),
+        username:
+          this._social.github.username ??
+          (override ? this.username : undefined),
       },
       linkedin: {
-        username: this._social.linkedin.username ?? (override ? this.username : undefined),
+        username:
+          this._social.linkedin.username ??
+          (override ? this.username : undefined),
       },
       telegram: {
-        telephone: this._social.telegram.telephone ?? (override ? this.telephone : undefined),
-        username: this._social.telegram.username ?? (override ? this.username : undefined),
+        telephone:
+          this._social.telegram.telephone ??
+          (override ? this.telephone : undefined),
+        username:
+          this._social.telegram.username ??
+          (override ? this.username : undefined),
       },
       twitter: {
-        username: this._social.twitter.username ?? (override ? this.username : undefined),
+        username:
+          this._social.twitter.username ??
+          (override ? this.username : undefined),
       },
       whatsapp: {
-        telephone: this._social.whatsapp.telephone ?? (override ? this.telephone : undefined),
+        telephone:
+          this._social.whatsapp.telephone ??
+          (override ? this.telephone : undefined),
       },
     };
   }
 
-  private sortObjectKeys({ object }: { object: { [key: string]: unknown } }): IUser {
+  private sortObjectKeys({
+    object,
+  }: {
+    object: { [key: string]: unknown };
+  }): IUser {
     const sortedObj: { [key: string]: unknown } = {};
     const sortedKeys = Object.keys(object).sort();
 
     for (const key of sortedKeys) {
       const value = object[key];
       sortedObj[key] =
-        typeof value === 'object' && value !== null && !Array.isArray(value) && !(value instanceof Date)
+        typeof value === 'object' &&
+        value !== null &&
+        !Array.isArray(value) &&
+        !(value instanceof Date)
           ? this.sortObjectKeys({ object: value as { [key: string]: unknown } })
           : value;
     }

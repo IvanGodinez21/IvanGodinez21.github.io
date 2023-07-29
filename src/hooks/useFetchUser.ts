@@ -1,7 +1,11 @@
 import { IUser } from '@/types/user';
 import { useEffect, useState } from 'react';
 
-export function useFetchUser(): { user: IUser | undefined; isLoading: boolean; error: string | undefined } {
+export function useFetchUser(): {
+  user: IUser | undefined;
+  isLoading: boolean;
+  error: string | undefined;
+} {
   const [user, setUser] = useState<IUser | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);

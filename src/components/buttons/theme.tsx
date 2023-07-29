@@ -21,7 +21,8 @@ export default function ThemeButton() {
         title={'Toggle theme'}
         type={'button'}
         onPointerUp={(e) => {
-          if (e.button !== 2) setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+          if (e.button !== 2)
+            setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
         }}
         onContextMenu={(e) => {
           e.preventDefault();

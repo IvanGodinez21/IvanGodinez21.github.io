@@ -7,11 +7,11 @@ import { ILayout } from '@/types/layout';
 export default async function DefaultLayout({ children }: ILayout) {
   const state = store.getState().state;
   return (
-    <div className={'flex flex-col h-screen w-screen'}>
+    <div className={'flex h-screen w-screen flex-col'}>
       <header className={'sticky w-full'}>
         <Header user={state.user} />
       </header>
-      <main className={'flex flex-col flex-1 m-4 space-y-2 overflow-y-hidden'}>
+      <main className={'m-4 flex flex-1 flex-col space-y-2 overflow-y-hidden'}>
         <Main>{children}</Main>
       </main>
       <footer className={'sticky w-full'}>

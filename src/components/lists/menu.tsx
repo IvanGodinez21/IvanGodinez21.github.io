@@ -18,13 +18,13 @@ export default function MenuList({
     <nav id={id}>
       <ul
         className={
-          'flex flex-col rounded-lg max-md:ring-2 max-md:bg-tea-green dark:max-md:bg-gunmetal md:flex-row md:space-x-4 md:text-sm md:font-medium ring-gunmetal dark:ring-tea-green max-md:text-gunmetal dark:max-md:text-tea-green'
+          'flex flex-col rounded-lg ring-gunmetal dark:ring-tea-green max-md:bg-tea-green max-md:text-gunmetal max-md:ring-2 dark:max-md:bg-gunmetal dark:max-md:text-tea-green md:flex-row md:space-x-4 md:text-sm md:font-medium'
         }
       >
         {routes.map((route, index) => (
           <li key={index}>
             <button
-              className={`btn-navbar-category text-left w-full ${
+              className={`btn-navbar-category w-full text-left ${
                 pathname === route.path ? 'bg-cadet-blue dark:bg-keppel' : ''
               }`}
               type={'button'}

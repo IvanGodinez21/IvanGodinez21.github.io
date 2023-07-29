@@ -20,7 +20,9 @@ const font = Poppins({
 const user = await (async () => await getUser())();
 
 store.dispatch(actions.setUser(user));
-store.dispatch(actions.setPartyMode(moment().isSame(moment(user.birthday), 'day')));
+store.dispatch(
+  actions.setPartyMode(moment().isSame(moment(user.birthday), 'day')),
+);
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -29,7 +31,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang={'en'} className={`${font.variable}`}>
       <body>

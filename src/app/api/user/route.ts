@@ -9,10 +9,14 @@ export async function GET() {
 }
 
 async function fetchUser() {
-  const discord = process.env.DISCORD_ID ? await Lanyard.fetch({ userId: process.env.DISCORD_ID }) : undefined;
+  const discord = process.env.DISCORD_ID
+    ? await Lanyard.fetch({ userId: process.env.DISCORD_ID })
+    : undefined;
   const github = (await octokit.rest.users.getAuthenticated()).data;
   return new User({
-    birthdate: process.env.BIRTHDATE ? moment(process.env.BIRTHDATE).toDate() : undefined,
+    birthdate: process.env.BIRTHDATE
+      ? moment(process.env.BIRTHDATE).toDate()
+      : undefined,
     description: process.env.DESCRIPTION,
     email: process.env.EMAIL,
     education: process.env.EDUCATION?.split(', '),
@@ -27,7 +31,8 @@ async function fetchUser() {
       discord: {
         ...discord,
         id: discord?.discord_user.id ?? process.env.DISCORD_ID,
-        username: discord?.discord_user.username ?? process.env.DISCORD_USERNAME,
+        username:
+          discord?.discord_user.username ?? process.env.DISCORD_USERNAME,
       },
       facebook: {
         username: process.env.FACEBOOK_USERNAME,
@@ -55,6 +60,8 @@ async function fetchUser() {
       },
     },
     technologies: process.env.TECNOLOGIES?.split(', '),
-    telephone: process.env.TELEPHONE_NUMBER ? `+${Number(process.env.TELEPHONE_NUMBER)}` : undefined,
+    telephone: process.env.TELEPHONE_NUMBER
+      ? `+${Number(process.env.TELEPHONE_NUMBER)}`
+      : undefined,
   }).toJSON();
 }

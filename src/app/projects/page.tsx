@@ -18,7 +18,10 @@ export default function ProjectsPage() {
       setIsLoading(true);
       const newRepos = await getRepos({ page: state.reposPage });
       if (newRepos.length) {
-        const uniqueRepos = newRepos.filter((repo) => !state.repos.map((prevRepo) => prevRepo.id).includes(repo.id));
+        const uniqueRepos = newRepos.filter(
+          (repo) =>
+            !state.repos.map((prevRepo) => prevRepo.id).includes(repo.id),
+        );
         dispatch(actions.setRepos([...state.repos, ...uniqueRepos]));
         dispatch(actions.setReposPage(state.reposPage + 1));
       }
@@ -26,7 +29,8 @@ export default function ProjectsPage() {
     }
     async function handleScroll() {
       if (content?.current && !isLoading) {
-        const scrollPosition = content.current.scrollHeight - content.current.clientHeight;
+        const scrollPosition =
+          content.current.scrollHeight - content.current.clientHeight;
         if (Math.ceil(content.current.scrollTop) >= scrollPosition) {
           await getReposByPage();
         }
@@ -46,14 +50,16 @@ export default function ProjectsPage() {
   }, [dispatch, isLoading, state.repos, state.reposPage]);
 
   return (
-    <div className={'h-fit w-fit grid m-2 gap-2'}>
+    <div className={'m-2 grid h-fit w-fit gap-2'}>
       {state.repos?.map((repo) => (
         <Link
           key={repo.id}
           href={repo.html_url}
           target={'_blank'}
           rel={'noopener noreferrer'}
-          className={`${repo.private ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+          className={`${
+            repo.private ? 'cursor-not-allowed' : 'cursor-pointer'
+          }`}
         >
           <RepoCard repo={repo} />
         </Link>

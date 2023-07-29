@@ -14,7 +14,8 @@ export default class TsparticlesTools {
     if (eventTarget instanceof Element) {
       let position: ConfettiOptions['position'];
       if (!options?.position) {
-        const { height, left, top, width } = eventTarget.getBoundingClientRect();
+        const { height, left, top, width } =
+          eventTarget.getBoundingClientRect();
         const { innerHeight, innerWidth } = window;
         position = {
           x: ((left + width / 2) / innerWidth) * 100,

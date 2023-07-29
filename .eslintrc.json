@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "commonjs": true,
-    "es2021": true,
+    "es6": true,
     "node": true
   },
   "extends": [
@@ -10,32 +10,18 @@
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended"
   ],
-  "ignorePatterns": [
-    "postcss.config.{js,ts}",
-    "next.config.{js,ts}",
-    "tailwind.config.{js,ts}"
-  ],
+  "ignorePatterns": ["next.config.js", "postcss.config.js"],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "sourceType": "module"
   },
+  "plugins": ["prettier"],
   "root": true,
   "rules": {
-    "indent": [
-      "warn",
-      2,
-      { "SwitchCase": 1 }
-    ],
-    "quotes": [
-      "warn",
-      "single",
-      { "avoidEscape": true }
-    ],
-    "semi": [
-      "warn",
-      "always"
-    ]
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "semi": ["warn", "always"]
   }
 }

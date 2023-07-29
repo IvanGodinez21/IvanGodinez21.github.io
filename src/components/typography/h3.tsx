@@ -7,5 +7,9 @@ export default function H3({
   children: DOMAttributes<HTMLHeadingElement>['children'];
   className?: HTMLAttributes<HTMLHeadingElement>['className'];
 }) {
-  return <h2 className={[className, 'text-lg'].filter(Boolean).join(' ')}>{children}</h2>;
+  return (
+    <h2 className={[className, 'text-lg'].filter(Boolean).join(' ')}>
+      {children}
+    </h2>
+  );
 }

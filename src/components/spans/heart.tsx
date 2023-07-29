@@ -12,7 +12,7 @@ export default function HeartSpan() {
   }
   return (
     <span
-      className={'animate-heartbeat inline-block'}
+      className={'inline-block animate-heartbeat'}
       onPointerUp={(e) => emitHearts({ e })}
       onPointerOver={(e) => emitHearts({ e })}
       onPointerOut={() => {

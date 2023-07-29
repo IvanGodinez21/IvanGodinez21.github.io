@@ -10,7 +10,9 @@ export default function Preloader({ state }: { state: IPreloaderProps }) {
   const loaded = useRef(false);
   if (!loaded.current) {
     store.dispatch(actions.setUser(state.user));
-    store.dispatch(actions.setPartyMode(moment().isSame(moment(state.user.birthday), 'day')));
+    store.dispatch(
+      actions.setPartyMode(moment().isSame(moment(state.user.birthday), 'day')),
+    );
     loaded.current = true;
   }
   return null;

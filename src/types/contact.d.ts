@@ -1,4 +1,9 @@
-import { ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, SVGProps } from 'react';
+import {
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  RefAttributes,
+  SVGProps,
+} from 'react';
 
 interface IContactMethod {
   icon:

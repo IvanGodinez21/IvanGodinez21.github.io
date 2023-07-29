@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { IAppState } from '@/types/app';
 import { useFetchUser } from '@/hooks/useFetchUser';
 
@@ -19,7 +25,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, [user]);
 
   if (!appState) return;
-  return <AppStateContext.Provider value={appState}>{children}</AppStateContext.Provider>;
+  return (
+    <AppStateContext.Provider value={appState}>
+      {children}
+    </AppStateContext.Provider>
+  );
 }
 
 export const useAppState = (): IAppState => {

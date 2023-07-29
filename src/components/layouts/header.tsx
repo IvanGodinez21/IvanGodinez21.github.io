@@ -12,13 +12,13 @@ export default function Header({ user }: { user?: IUser }) {
   const [navHidden, setNavHidden] = useState<boolean>(true);
   const router = useRouter();
   return (
-    <div className={'p-2 shadow bg-emerald text-gunmetal'}>
-      <div className={'flex flex-wrap justify-between mx-2'}>
+    <div className={'bg-emerald p-2 text-gunmetal shadow'}>
+      <div className={'mx-2 flex flex-wrap justify-between'}>
         <div className={'flex max-lg:order-1 max-sm:order-2'}>
           <button
             aria-label={'Redirect to start page'}
             title={'Start page'}
-            className={'flex items-center btn-navbar-icon'}
+            className={'btn-navbar-icon flex items-center'}
             type={'button'}
             onPointerUp={() => {
               router.push('/');
@@ -26,23 +26,31 @@ export default function Header({ user }: { user?: IUser }) {
             }}
           >
             {(user?.username ?? user?.fullName) && (
-              <span className={'self-center text-xl font-semibold whitespace-nowrap'}>
+              <span
+                className={
+                  'self-center whitespace-nowrap text-xl font-semibold'
+                }
+              >
                 {user.username ? `@${user.username}` : user.fullName}
               </span>
             )}
           </button>
         </div>
-        <div className={'flex md:hidden max-md:order-3'}>
+        <div className={'flex max-md:order-3 md:hidden'}>
           <MenuButton id={'header-nav'} state={[navHidden, setNavHidden]} />
         </div>
         <div
-          className={`lg:order-2 md:order-4 max-md:order-4 max-sm:order-4 max-md:mt-2 justify-between items-center align-middle w-full md:flex lg:flex md:w-auto lg:w-auto ${
+          className={`w-full items-center justify-between align-middle max-md:order-4 max-md:mt-2 max-sm:order-4 md:order-4 md:flex md:w-auto lg:order-2 lg:flex lg:w-auto ${
             navHidden ? 'hidden' : ''
           }`}
         >
-          <MenuList id={'header-nav'} routes={routes} state={[navHidden, setNavHidden]} />
+          <MenuList
+            id={'header-nav'}
+            routes={routes}
+            state={[navHidden, setNavHidden]}
+          />
         </div>
-        <div className={'flex lg:order-3 md:order-4 max-sm:order-1'}>
+        <div className={'flex max-sm:order-1 md:order-4 lg:order-3'}>
           <ThemeButton />
         </div>
       </div>

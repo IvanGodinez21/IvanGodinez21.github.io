@@ -9,11 +9,19 @@ export default function Main({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
     <>
-      <div className={'bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-1 items-center justify-center'}>
-        <H1 className={'font-bold first-letter:uppercase'}>{NextTools.pageName({ pathname })}</H1>
+      <div
+        className={
+          'flex flex-1 items-center justify-center rounded-lg bg-granny-smith-apple dark:bg-indigo-dye'
+        }
+      >
+        <H1 className={'font-bold first-letter:uppercase'}>
+          {NextTools.pageName({ pathname })}
+        </H1>
       </div>
       <div
-        className={'bg-granny-smith-apple dark:bg-indigo-dye rounded-lg flex flex-[9_9_0%] overflow-y-auto'}
+        className={
+          'flex flex-[9_9_0%] overflow-y-auto rounded-lg bg-granny-smith-apple dark:bg-indigo-dye'
+        }
         ref={content}
       >
         {children}

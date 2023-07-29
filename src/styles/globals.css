@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply bg-tea-green dark:bg-gunmetal text-gunmetal dark:text-tea-green;
+    @apply bg-tea-green text-gunmetal dark:bg-gunmetal dark:text-tea-green;
   }
 
   /* *::-webkit-resizer {
@@ -28,15 +28,15 @@
   }
 
   *::-webkit-scrollbar-track-piece {
-    @apply bg-blue-saphire dark:bg-granny-smith-apple bg-clip-content border-4 border-solid rounded-sm border-transparent;
+    @apply rounded-sm border-4 border-solid border-transparent bg-blue-saphire bg-clip-content dark:bg-granny-smith-apple;
   }
 
   *::-webkit-scrollbar-track-piece:decrement {
-    @apply bg-prussian-blue dark:bg-emerald bg-clip-content border-4 border-solid rounded-sm border-transparent;
+    @apply rounded-sm border-4 border-solid border-transparent bg-prussian-blue bg-clip-content dark:bg-emerald;
   }
 
   *::-webkit-scrollbar-thumb {
-    @apply bg-gunmetal dark:bg-tea-green shadow rounded-md w-1 h-10;
+    @apply h-10 w-1 rounded-md bg-gunmetal shadow dark:bg-tea-green;
   }
 
   *::-webkit-scrollbar-corner {
@@ -69,24 +69,24 @@
 }
 
 .btn-selectable {
-  @apply rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none focus:ring-inset focus-visible:ring-gunmetal dark:focus-visible:ring-tea-green focus-visible:ring-2 active:bg-cadet-blue dark:active:bg-blue-saphire;
+  @apply rounded-lg hover:bg-keppel focus:outline-none focus:ring-inset focus-visible:ring-2 focus-visible:ring-gunmetal active:bg-cadet-blue dark:hover:bg-cadet-blue dark:focus-visible:ring-tea-green dark:active:bg-blue-saphire;
 }
 
 .btn-contact {
-  @apply btn-selectable flex items-center p-3 text-base font-bold bg-tea-green dark:bg-indigo-dye;
+  @apply btn-selectable flex items-center bg-tea-green p-3 text-base font-bold dark:bg-indigo-dye;
 }
 
 .btn-contact-icon {
 }
 
 .btn-navbar-icon {
-  @apply inline-flex items-center rounded-lg p-2 bg-transparent hover:bg-keppel focus:outline-none focus:ring-inset focus-visible:ring-gunmetal focus-visible:ring-2 active:bg-cadet-blue;
+  @apply inline-flex items-center rounded-lg bg-transparent p-2 hover:bg-keppel focus:outline-none focus:ring-inset focus-visible:ring-2 focus-visible:ring-gunmetal active:bg-cadet-blue;
 }
 
 .btn-navbar-category {
-  @apply block max-md:py-2.5 max-md:px-2.5 p-2 rounded-lg hover:bg-keppel dark:hover:bg-cadet-blue focus:outline-none active:bg-cadet-blue dark:active:bg-blue-saphire focus-visible:ring-gunmetal dark:focus-visible:max-md:ring-tea-green focus-visible:ring-2;
+  @apply block rounded-lg p-2 hover:bg-keppel focus:outline-none focus-visible:ring-2 focus-visible:ring-gunmetal active:bg-cadet-blue dark:hover:bg-cadet-blue dark:active:bg-blue-saphire max-md:px-2.5 max-md:py-2.5 dark:focus-visible:max-md:ring-tea-green;
 }
 
 .btn-footer-icon {
-  @apply inline-flex items-center rounded-lg p-1 bg-transparent focus:outline-none focus:ring-inset focus-visible:ring-gunmetal focus-visible:ring-2;
+  @apply inline-flex items-center rounded-lg bg-transparent p-1 focus:outline-none focus:ring-inset focus-visible:ring-2 focus-visible:ring-gunmetal;
 }
