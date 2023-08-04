@@ -1,4 +1,4 @@
-export default class Tools {
+export default abstract class Tools {
   public static toCamelCase({
     object,
   }: {

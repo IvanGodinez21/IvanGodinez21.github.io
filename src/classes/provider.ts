@@ -1,6 +1,6 @@
 import { createElement, FC, ReactNode } from 'react';
 
-export default class Provider {
+export default abstract class Provider {
   static combine = (
     providers: FC<{ children: ReactNode }>[],
     children: ReactNode,

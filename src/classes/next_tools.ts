@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-export default class NextTools {
+export default abstract class NextTools {
   static pageName({
     pathname,
   }: {
