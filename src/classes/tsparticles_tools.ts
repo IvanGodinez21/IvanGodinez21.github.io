@@ -1,7 +1,7 @@
 import { ConfettiOptions, confetti } from 'tsparticles-confetti';
 import { presets } from '@/constants/tsparticles';
 
-export default class TsparticlesTools {
+export default abstract class TsparticlesTools {
   static effect({
     eventTarget,
     options,

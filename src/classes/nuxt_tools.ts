@@ -1,6 +1,6 @@
 import { useRoute } from 'nuxt/app';
 
-export default class NuxtTools {
+export default abstract class NuxtTools {
   static pageName({
     pathname,
   }: {
