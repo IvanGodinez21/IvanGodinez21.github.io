@@ -93,18 +93,16 @@ const aboutCells = [
             <FontsH2>Information</FontsH2>
           </div>
           <div class="m-2 grid gap-2 text-sm md:grid-cols-2">
-            <div
-              v-for="(aboutCell, index) in aboutCells"
-              :key="index"
-              class="grid grid-cols-2 gap-2"
-            >
-              <p class="font-semibold">
-                {{ aboutCell.title }}
-              </p>
-              <p>
-                {{ aboutCell.value }}
-              </p>
-            </div>
+            <template v-for="(aboutCell, index) in aboutCells" :key="index">
+              <div v-if="aboutCell.value" class="grid grid-cols-2 gap-2">
+                <p class="font-semibold">
+                  {{ aboutCell.title }}
+                </p>
+                <p>
+                  {{ aboutCell.value }}
+                </p>
+              </div>
+            </template>
           </div>
         </div>
         <div>
